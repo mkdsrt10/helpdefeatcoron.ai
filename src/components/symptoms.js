@@ -20,7 +20,7 @@ class SymptomsForm extends React.Component {
 				diarrhea: false,
 				fatigue: false,
 				nota: false,
-				on_color: "rgb(255, 127, 129)",
+				on_color: "rgb(127, 90, 179)",
 				off_color: "rgb(243,245,248)",
 				visible: "",
 				bg: "white",

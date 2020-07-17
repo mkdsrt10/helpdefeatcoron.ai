@@ -18,7 +18,7 @@ class GettingStarted extends React.Component {
         if (this.props.vitals === 1 && this.props.symptoms === 1 && this.props.personal === 1) {
             this.props.onRouteChange("wait")
         } else {
-            this.props.onRouteChange("vitals")
+            this.props.onRouteChange("personal")
         }
     }
 
@@ -26,7 +26,7 @@ class GettingStarted extends React.Component {
       const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
       ];
-      
+
       let {onRouteChange} = this.props
       return (
         <div className={`w-100 mb3 ${(this.state.visible) ? "fadeIn" : "fadeOut"}`}>

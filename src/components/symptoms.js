@@ -66,6 +66,7 @@ class SymptomsForm extends React.Component {
 	}
 
 	componentDidMount() {
+		console.log(this.props)
 		this.setState({message: ""})
 		this.setState({vitals: this.props.vitals})
 		this.setState({symptoms: this.props.symptoms})
@@ -104,17 +105,20 @@ class SymptomsForm extends React.Component {
 		}
 		const requestOptions = {
 			    method: 'POST',
-			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': true },
+			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
 		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/updatevitals2?', requestOptions)
 	        .then(res=>{
 	        	console.log(res)
 	        	setTimeout(()=>{this.setState({visible: false})}, 100)
-	        	setTimeout(()=>{this.props.refreshCalendar()},500)
 				setTimeout(()=>{this.props.onDailyUpdate(this.state)}, 500)
+				setTimeout(()=>{this.props.refreshCalendar()},500)
 	        	})
-	        .catch(err=>console.log(err))
+	        .catch(err=>{
+	        	this.setState({message:""})
+	        	this.setState({error: "An error occured. Please try again."})
+	        })
 
 	}
 
@@ -136,17 +140,20 @@ class SymptomsForm extends React.Component {
 		}
 		const requestOptions = {
 			    method: 'POST',
-			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': true },
+			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
 		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/postvitals?', requestOptions)
 	        .then(res=>{
 	        	console.log(res)
 	        	setTimeout(()=>{this.setState({visible: false})},100)
-				setTimeout(()=>{this.props.onVitalsUpdate(this.state)},500)
+				setTimeout(()=>{this.props.onDailyUpdate(this.state)},500)
 				setTimeout(()=>{this.props.refreshCalendar()},500)
 	        })
-	        .catch(err=>console.log(err))
+	        .catch(err=>{
+	        	this.setState({message:""})
+	        	this.setState({error: "An error occured. Please try again."})
+	        })
 	}
 
 	render() {

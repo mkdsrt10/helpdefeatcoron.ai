@@ -1,6 +1,6 @@
 import React from "react"
 import {navigate} from "gatsby";
-import {
+import {  
   isBrowser,
   isMobile
 } from "react-device-detect";
@@ -18,7 +18,7 @@ schema
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
 .has().digits()
-.has().symbols()
+.has().symbols()                                
 .has().not().spaces()
 
 class ForgotForm2 extends React.Component {
@@ -37,7 +37,7 @@ class ForgotForm2 extends React.Component {
 		console.log(e.target.value)
 	}
 
-
+	
 
 	render() {
 		const {email, onRouteChange} = this.props

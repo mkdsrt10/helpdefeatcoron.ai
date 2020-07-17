@@ -1,6 +1,6 @@
 import React from "react"
 import {navigate} from "gatsby";
-import {
+import {  
   isBrowser,
   isMobile
 } from "react-device-detect";
@@ -27,7 +27,7 @@ class ForgotForm1 extends React.Component {
 
 	render() {
 		const {onRouteChange, onEmailUpdate} = this.props
-		const onSubmit =() => {
+		const onSubmit =() => {			
 			if (validator.validate(this.state.email) === true) {
 				this.setState({error: ""})
 				this.setState({message:"Loading..."})

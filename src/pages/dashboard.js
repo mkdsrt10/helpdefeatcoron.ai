@@ -25,6 +25,7 @@ class Dashboard extends React.Component {
 		this.child = React.createRef()
 		this.state = {
 			path:"",
+			prevroute:"",
 			day: today_date,
 			month: today_month,
 			date: finaldate,
@@ -45,14 +46,13 @@ class Dashboard extends React.Component {
 				fatiguetiredness: "",
 				none9:"",
 			},
-			vitals_data: {
+			vitals_data: {	
 				heartratefeeling: "",
 				heartrate: "",
 				bloodpressure1: "",
 				oxygensaturation: "",
 				bodytemperature: "",
 				fever1: "",
-				temptype: true,
 			},
 			personal_data: {
 				traveltoday:"",
@@ -63,25 +63,31 @@ class Dashboard extends React.Component {
 			},
 			clientid: "",
 			data:"",
+			graphdata:"",
 		}
 	}
 
 	onRouteChange = (route) => {
-		this.setState({route: route});
+		this.setState({prevroute: this.state.route})
+		this.setState({route: route})
 		console.log(this.state)
-	};
+	}
+
+	changeGraphData = (data) => {
+		this.setState({graphdata: data})
+	}
 
 	vitalDone = () => {
 		this.setState({vitals: 1})
-	};
+	}
 
 	personalDone = () => {
-		this.setState({personal: 1})
-	};
+		this.setState({personal: 1}) 
+	}
 
 	symptomsDone = () => {
 		this.setState({symptoms: 1})
-	};
+	}
 
 	onDailyUpdate = (input) => {
 		this.setState({daily_sym: {
@@ -99,8 +105,12 @@ class Dashboard extends React.Component {
 		}})
 		console.log(this.state)
 		this.setState({symptoms: 1})
-		this.onRouteChange("vitals")
-	};
+		if (this.state.vitals==1 && this.state.personal==1) {
+			this.setState({route:"wait"})
+		} else {
+			this.onRouteChange("personal")	
+		}
+	}
 
 	onVitalsUpdate = (input) => {
 		this.setState({vitals: 1})
@@ -111,10 +121,13 @@ class Dashboard extends React.Component {
 			heartrate: input.heart_rate,
 			oxygensaturation: input.oxygen,
 			fever1: input.fever,
-			temptype: input.degree
 		}})
 		console.log(this.state)
-		this.onRouteChange("wait")
+		if (this.state.symptoms==1 && this.state.personal==1) {
+			this.setState({route:"wait"})
+		} else {
+			this.onRouteChange("symptoms")	
+		}
 	}
 
 
@@ -126,9 +139,9 @@ class Dashboard extends React.Component {
 			exposed: (input.risk_person==="true"),
 			pic: input.picture,
 			feeling: (input.happy==="true"),
-		}});
+		}})
 		console.log(this.state)
-		this.onRouteChange("symptoms")
+		this.onRouteChange("wait")
 	}
 
 	getDatabyDate = (date) => {
@@ -162,7 +175,6 @@ class Dashboard extends React.Component {
 						heartrate: res.heartrate,
 						oxygensaturation: res.oxygensaturation,
 						fever1: res.fever1,
-						temptype: res.temptype,
 					}})
 					this.setState({personal_data: {
 						traveltoday: res.traveltoday,
@@ -185,7 +197,7 @@ class Dashboard extends React.Component {
 		this.setState({symptoms: 0})
 		this.setState({personal: 0})
 		this.getDatabyDate(changeddate)
-	};
+	}
 
 	componentDidMount() {
 		this.setState({path: this.props.location.pathname})
@@ -200,7 +212,7 @@ class Dashboard extends React.Component {
 				}
 				GetData()
 					.then(res=> {
-						console.log("data recieved");
+						console.log("data recieved")
 						this.setState({daily_sym: {
 							fever2: res.fever2,
 							chillsorsweating: res.chillsorsweating,
@@ -221,7 +233,6 @@ class Dashboard extends React.Component {
 							heartrate: res.heartrate,
 							oxygensaturation: res.oxygensaturation,
 							fever1: res.fever1,
-							temptype: res.temptype,
 						}})
 						this.setState({personal_data: {
 							traveltoday: res.traveltoday,
@@ -238,6 +249,7 @@ class Dashboard extends React.Component {
 	}
 
 	dataSet = (data) => {
+		console.log(data)
 		this.setState({data: data})
 	}
 
@@ -250,41 +262,59 @@ class Dashboard extends React.Component {
 		let back;
 		if (this.state.route === "vitals") {
 			if (this.state.vitals == 1 && this.state.personal == 1 && this.state.symptoms == 1) {
-				this.setState({route:"pred"})
+				if (this.state.prevroute=="pred") {
+					back = <BackButton onRouteChange={this.onRouteChange}/>
+					output = <VitalForm refreshCalendar={this.refreshCalendar} vitals={this.state.vitals} symptoms={this.state.symptoms} personal={this.state.personal} clientid={this.state.clientid} onVitalsUpdate={this.onVitalsUpdate} Dated={this.state.day} Month={this.state.month} data = {this.state.vitals_data}/>
+				} else {
+					this.setState({route:"pred"})
+				}
 			} else {
 				back = <BackButton onRouteChange={this.onRouteChange}/>
 				output = <VitalForm refreshCalendar={this.refreshCalendar} vitals={this.state.vitals} symptoms={this.state.symptoms} personal={this.state.personal} clientid={this.state.clientid} onVitalsUpdate={this.onVitalsUpdate} Dated={this.state.day} Month={this.state.month} data = {this.state.vitals_data}/>
-			}
+			} 
 		} else if (this.state.route === "symptoms") {
 			if (this.state.vitals == 1 && this.state.personal == 1 && this.state.symptoms == 1) {
-				this.setState({route:"pred"})
+				if (this.state.prevroute=="pred") {
+					back = <BackButton onRouteChange={this.onRouteChange}/>
+					output = <SymptomsForm refreshCalendar={this.refreshCalendar} vitals={this.state.vitals} symptoms={this.state.symptoms} personal={this.state.personal} onDailyUpdate={this.onDailyUpdate} Dated={this.state.day} Month={this.state.month} data = {this.state.daily_sym} clientid = {this.state.clientid}/>
+				} else {
+					this.setState({route:"pred"})
+				}
 			} else {
 				back = <BackButton onRouteChange={this.onRouteChange}/>
 				output = <SymptomsForm refreshCalendar={this.refreshCalendar} vitals={this.state.vitals} symptoms={this.state.symptoms} personal={this.state.personal} onDailyUpdate={this.onDailyUpdate} Dated={this.state.day} Month={this.state.month} data = {this.state.daily_sym} clientid = {this.state.clientid}/>
 			}
 		} else if (this.state.route==="personal") {
 			if (this.state.vitals == 1 && this.state.personal == 1 && this.state.symptoms == 1) {
-				this.setState({route:"pred"})
+				if (this.state.prevroute=="pred") {
+					back = <BackButton onRouteChange={this.onRouteChange}/>
+					output = <PersonalForm refreshCalendar={this.refreshCalendar} vitals={this.state.vitals} symptoms={this.state.symptoms} personal={this.state.personal} onPersonalUpdate={this.onPersonalUpdate} Dated={this.state.day} Month={this.state.month} data={this.state.personal_data} clientid = {this.state.clientid}/>
+				} else {
+					this.setState({route:"pred"})
+				}
 			} else {
-				back = <BackButton onRouteChange={this.onRouteChange}/>;
+				back = <BackButton onRouteChange={this.onRouteChange}/>
 				output = <PersonalForm refreshCalendar={this.refreshCalendar} vitals={this.state.vitals} symptoms={this.state.symptoms} personal={this.state.personal} onPersonalUpdate={this.onPersonalUpdate} Dated={this.state.day} Month={this.state.month} data={this.state.personal_data} clientid = {this.state.clientid}/>
 			}
 		} else if (this.state.route==="wait") {
-			if (this.state.symptoms === 0) {
+			console.log("in waiting")
+			if (this.state.vitals===0) {
+				this.setState({route: "vitals"})
+			} else if (this.state.symptoms === 0) {
 				this.setState({route: "symptoms"})
 			} else {
-				output = <Waiting Dated={this.state.day} Month={this.state.month} data={this.state} onRouteChange={this.onRouteChange} dataSet={this.dataSet}/>
+				output = <Waiting Dated={this.state.day} Month={this.state.month} onRouteChange={this.onRouteChange} dataSet={this.dataSet}/>
 			}
 		} else if (this.state.route === "gs") {
 			if (this.state.vitals === 1 && this.state.personal === 1 && this.state.symptoms===1) {
-				this.setState({route: "pred"})
+				this.setState({route: "wait"})
 			} else {
-				output = <GettingStarted Dated={this.state.day} Month={this.state.month} onRouteChange={this.onRouteChange}/>
+				output = <GettingStarted vitals={this.state.vitals} symptoms={this.state.symptoms} personal={this.state.personal} Dated={this.state.day} Month={this.state.month} onRouteChange={this.onRouteChange}/>
 			}
 		} else if (this.state.route === "pred") {
 			output=(
 				<div>
-					<Prediction Dated={this.state.day} Month={this.state.month} data="high risk"/>
+					<Prediction Dated={this.state.day} Month={this.state.month} data={this.state.data}/>
 				</div>
 			)
 		}
@@ -296,7 +326,7 @@ class Dashboard extends React.Component {
 					  <div style={{"min-width":"290px"}}>
 					  	{back}
 					  	<List symptoms = {this.state.symptoms} personal = {this.state.personal} vitals = {this.state.vitals} onRouteChange={this.onRouteChange} route={this.state.route}/>
-					  	<Table clientid={this.state.clientid} ref = {this.child} onDateChange={this.onDateChange} daily={this.state.daily} personal = {this.state.personal} vitals = {this.state.vitals} vitalDone={this.vitalDone} personalDone={this.personalDone} symptomsDone={this.symptomsDone}/>
+					  	<Table clientid={this.state.clientid} ref = {this.child} onDateChange={this.onDateChange} symptoms={this.state.symptoms} personal = {this.state.personal} vitals = {this.state.vitals} vitalDone={this.vitalDone} personalDone={this.personalDone} symptomsDone={this.symptomsDone}/>
 					  </div>
 					  <div className="ml3" style={{width:"700px"}}>
 					    {output}
@@ -304,11 +334,13 @@ class Dashboard extends React.Component {
 					</div>
 					</BrowserView>
 				<MobileView>
-					<div style={{"margin":"auto", display: 'flex', flexDirection: 'row'}}>
+					<div style={{"margin":"auto", width: "80vw"}}>
 						<List symptoms = {this.state.symptoms} personal = {this.state.personal} vitals = {this.state.vitals} onRouteChange={this.onRouteChange} route={this.state.route}/>
-						<Table clientid={this.state.clientid} ref = {this.child} onDateChange={this.onDateChange} daily={this.state.daily} personal = {this.state.personal} vitals = {this.state.vitals} vitalDone={this.vitalDone} personalDone={this.personalDone} symptomsDone={this.symptomsDone}/>
 					</div>
-					<div style={{"margin":"auto","margin-top":"10px","padding-bottom":"50px"}}>
+					<div style={{width:"350px", margin:"auto"}}>
+					  	<Table clientid={this.state.clientid} ref = {this.child} onDateChange={this.onDateChange} daily={this.state.daily} personal = {this.state.personal} vitals = {this.state.vitals} vitalDone={this.vitalDone} personalDone={this.personalDone} symptomsDone={this.symptomsDone}/>
+					</div>
+					<div style={{"margin":"auto","margin-top":"10px","padding-bottom":"50px", width: "90vw"}}>
 						{output}
 					</div>
 				</MobileView>
@@ -316,7 +348,7 @@ class Dashboard extends React.Component {
 		);
 	}
 }
-
+  
 
 
 export default Dashboard

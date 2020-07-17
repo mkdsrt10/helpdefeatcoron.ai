@@ -62,7 +62,7 @@ body, html {
 
 .ph4-l {
   padding: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;  
 }
 
 .hover:hover{
@@ -72,10 +72,4 @@ body, html {
 
 .chosen {
   border-bottom: solid;
-}
-
-@media only screen and (max-width: 600px) {
-    .mobileOptimize {
-        padding: 2rem 1rem;
-    }
 }

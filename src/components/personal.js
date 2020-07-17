@@ -5,15 +5,6 @@ import Amplify, { Auth, Storage } from 'aws-amplify';
 import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
-
-Amplify.configure({
-    Storage: {
-        AWSS3: {
-            bucket: 'corona.ai', //REQUIRED -  Amazon S3 bucket
-        }
-    }
-});
-
 class PersonalForm extends React.Component {
 	constructor(props) {
 		super(props)
@@ -22,10 +13,10 @@ class PersonalForm extends React.Component {
 			risk_person: "",
 			known_found: "",
 			happy: "",
-			picture:'UPLOADED IMAGE',
+			picture:'UPLOAD IMAGE',
 			video:'',
 			error_message:"",
-			on_color: "rgb(127, 90, 179)",
+			on_color: "rgb(136, 242, 216)",
 			visible: "",
 			bg:"white",
 			message:"",
@@ -33,13 +24,15 @@ class PersonalForm extends React.Component {
 			symptoms:"",
 			personal:"",
 			imagename:"",
+			imageurl:"",
 		}
 	}
 
 	onOptionClick = (e) => {
-		this.setState({[e.target.name]: e.target.id});
+		this.setState({[e.target.name]: e.target.id})
 		console.log(this.state)
-	};
+		
+	}
 
 	componentDidMount() {
 		this.setState({message:""})
@@ -54,8 +47,15 @@ class PersonalForm extends React.Component {
 		this.setState({risk_person: x.exposed.toString()})
 		this.setState({known_found: x.foundanyone.toString()})
 		this.setState({happy: x.feeling.toString()})
-		// this.setState({picture: (x.pic === "")?"UPLOAD IMAGE":x.pic})
-
+		this.setState({picture: (x.pic === "")?"UPLOAD IMAGE":x.pic})
+		this.setState({imagename: x.pic})
+		let imagenamed = `${this.props.clientid}/${this.props.Dated}-${this.props.Month}` 
+		Storage.get(imagenamed)
+	      			.then(result => {
+	      				console.log(result)
+	      				this.setState({imageurl:result})
+	      			})
+	      			.catch(err => console.log(err))
 
 	}
 
@@ -65,23 +65,26 @@ class PersonalForm extends React.Component {
 			exposed: (this.state.risk_person==="true"),
 			foundanyone: (this.state.known_found==="true"),
 			feeling: (this.state.happy==="true"),
-			// pic: this.state.picture,
+			pic: this.state.imagename,
 			clientid: this.props.clientid,
 			date: `${this.props.Dated}/${this.props.Month}`
 		}
 		const requestOptions = {
 			    method: 'POST',
-			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': true },
+			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
 		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/updatevitals3?', requestOptions)
 	        .then(res=>{
 	        	console.log(res)
 	        	setTimeout(()=>{this.setState({visible: false})},100)
-	        	setTimeout(()=>{this.props.refreshCalendar()},500)
 				setTimeout(()=>{this.props.onPersonalUpdate(this.state)},500)
+				setTimeout(()=>{this.props.refreshCalendar()},500)
 	        })
-	        .catch(err=>console.log(err))
+	        .catch(err=>{
+	        	this.setState({message:""})
+	        	this.setState({error_message: "An error occured. Please try again."})
+	        })
 	}
 
 	sendData = () => {
@@ -90,13 +93,13 @@ class PersonalForm extends React.Component {
 			exposed: (this.state.risk_person==="true"),
 			foundanyone: (this.state.known_found==="true"),
 			feeling: (this.state.happy==="true"),
-			// pic: this.state.picture,
+			pic: this.state.picture,
 			clientid: this.props.clientid,
 			date: `${this.props.Dated}/${this.props.Month}`
-		};
+		}
 		const requestOptions = {
 			    method: 'POST',
-			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': true },
+			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
 		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/postvitals?', requestOptions)
@@ -106,39 +109,46 @@ class PersonalForm extends React.Component {
 	        	setTimeout(()=>{this.props.refreshCalendar()},500)
 				setTimeout(()=>{this.props.onPersonalUpdate(this.state)},500)
 	        })
-	        .catch(err=>console.log(err))
-	};
+	        .catch(err=>{
+	        	this.setState({message:""})
+	        	this.setState({error_message: "An error occured. Please try again."})
+	        })
+	}
 
 	render() {
 		const monthNames = ["January", "February", "March", "April", "May", "June",
 		  "July", "August", "September", "October", "November", "December"
 		];
 		let {onPersonalUpdate, Dated, Month}=this.props
-		// const onChange = (e) => {
-		//   this.setState({error_message: ""})
-	    //   let file = e.target.files[0];
-	    //   this.setState({picture: "UPLOADING..."})
-	    //   Storage.put(file.name, file, {
-	    //       contentType: 'image/png',
-	    //   })
-	    //   	.then (result => {
-	    //   		this.setState({picture: file.name})
-	    //   		console.log(result)
-	    //   		Storage.get(file.name)
-	    //   			.then(result => console.log(result))
-	    //   			.catch(err => console.log(err))
-	    //   	})
-	    //   	.catch(err => {
-	    //   		this.setState({picture: "UPLOAD IMAGE"})
-	    //   		this.setState({error_message: "Wrong format. Please try again"})
-	    //   	});
-	    // }
+		const onChange = (e) => {
+		  this.setState({error_message: ""})
+	      let file = e.target.files[0];
+	      this.setState({picture: "UPLOADING..."})
+	      let imagenamed = `${this.props.clientid}/${this.props.Dated}-${this.props.Month}` 
+	      Storage.put(imagenamed, file, {
+	          contentType: 'image/png',
+	      })
+	      	.then (result => {
+	      		this.setState({picture: file.name})
+	      		this.setState({imagename: imagenamed})
+	      		Storage.get(imagenamed)
+	      			.then(result => {
+	      				console.log(result)
+	      				this.setState({imageurl:result})
+	      			})
+	      			.catch(err => console.log(err))
+	      	})
+	      	.catch(err => {
+	      		this.setState({picture: "UPLOAD IMAGE"})
+	      		this.setState({error_message: "Wrong format. Please try again"})
+	      	});
+	    }
 
 	    const onClick = () => {
 	    	if (this.state.travel==="" || this.state.risk_person==="" || this.state.known_found === "" || this.state.picture === "UPLOAD IMAGE" || this.state.happy === "") {
 	    		this.setState({error_message:"Please enter all details."})
-	    	// } else if (this.state.picture === "UPLOADING...") {
-	    	// 	this.setState({error_message:"Please wait while the image is being uploaded."})
+	    	} else if (this.state.picture === "UPLOADING...") {
+	    		this.setState({error_message:"Please wait while the image is being uploaded."})
 	    	} else {
 	    		this.setState({error_message: ""})
 				this.setState({bg: "rgb(136, 242, 216)"})
@@ -179,11 +189,12 @@ class PersonalForm extends React.Component {
 					      	<a onClick={this.onOptionClick} id="true" name="happy" className="ml5 mb3 mt1 dark-gray pointer ph3 pv2 dib" style={{"font-size": (this.state.happy === "true") ? "44px" : "40px", opacity: (this.state.happy === "true") ? "1" : "0.5"}}>😃</a>
 					        <a onClick={this.onOptionClick} id="false" name="happy" className="ml2 mb3 mt1 dark-gray pointer ph3 pv2 dib" style={{"font-size": (this.state.happy === "false") ? "44px" : "40px", opacity: (this.state.happy === "false") ? "1" : "0.5"}}>🙁</a>
 				    	</div>
-				    	{/*<div className="ma1">*/}
-					    {/*    <p className="mt3 ml5 b mb1 gray gender">IMPORT PICTURE</p>*/}
-					    {/*  	<p onClick={()=>document.getElementById('hiddenInputButton').click()} className="pointer ml5 mt3 pt4 ph3 f6 b gray bg-washed-blue w-30" style={{height:"150px", "padding-top":"60px", "background":"rgb(243,245,248)"}}>{this.state.picture}</p>*/}
-					    {/*  	<input id="hiddenInputButton" onChange={onChange} label="" placeholder="" type="file" style={{display:"none"}}/>*/}
-				    	{/*</div>*/}
+				    	<div className="ma1">
+					        <p className="mt3 ml5 b mb1 gray gender">IMPORT PICTURE</p>
+					      	<p onClick={()=>document.getElementById('hiddenInputButton').click()} className="pointer ml5 mt3 pt4 ph3 f6 b gray bg-washed-blue w-30" style={{height:"150px", "padding-top":"60px", "background":"rgb(243,245,248)"}}>{this.state.picture}</p>
+					      	<input id="hiddenInputButton" onChange={onChange} label="" placeholder="" type="file" style={{display:"none"}}/>
+				    	</div>
+				    	<img className="ml5 mt0 ba bw1 b--light-gray pa2" style={{"maxWidth":"50%"}} src={this.state.imageurl}/>
 				    	<p className="f5 mt4 b red tc">{this.state.error_message}</p>
 				    	<p className="f5 mt4 dark-blue tc">{this.state.message}</p>
 				    	<div className="mt4 mb3">
@@ -211,11 +222,11 @@ class PersonalForm extends React.Component {
 					      	<a onClick={this.onOptionClick} id="true" name="happy" className="ml4 mb3 mt1 dark-gray pointer ph3 pv2 dib" style={{"font-size": this.state.happy === "true" ? "44px" : "40px", opacity: (this.state.happy === "true") ? "1" : "0.5"}}>😃</a>
 					        <a onClick={this.onOptionClick} id="false" name="happy" className="ml2 mb3 mt1 dark-gray pointer ph3 pv2 dib" style={{"font-size": this.state.happy === "false" ? "44px" : "40px", opacity: (this.state.happy === "false") ? "1" : "0.5"}}>🙁</a>
 				    	</div>
-				    	{/*<div className="ma1 w-70">*/}
-					    {/*    <p className="mt3 ml4 f5 b mb1 gray gender">IMPORT PICTURE</p>*/}
-					    {/*  	<p onClick={()=>document.getElementById('hiddenInputButton').click()} className="pointer ml4 mt3 pt4 ph3 f6 b gray bg-washed-blue w-60" style={{height:"150px", "padding-top":"60px", "background":"rgb(243,245,248)"}}>{this.state.picture}</p>*/}
-					    {/*  	<input id="hiddenInputButton" onChange={onChange} label="" placeholder="" type="file" style={{display:"none"}}/>*/}
-				    	{/*</div>*/}
+				    	<div className="ma1 w-70">
+					        <p className="mt3 ml4 f5 b mb1 gray gender">IMPORT PICTURE</p>
+					      	<p onClick={()=>document.getElementById('hiddenInputButton').click()} className="pointer ml4 mt3 pt4 ph3 f6 b gray bg-washed-blue w-60" style={{height:"150px", "padding-top":"60px", "background":"rgb(243,245,248)"}}>{this.state.picture}</p>
+					      	<input id="hiddenInputButton" onChange={onChange} label="" placeholder="" type="file" style={{display:"none"}}/>
+				    	</div>
 				    	<p className="f6 mt4 dark-blue tc">{this.state.error_message}</p>
 				    	<p className="f6 mt4 dark-blue tc">{this.state.message}</p>
 				    	<div className="mt4 mb3">
@@ -224,7 +235,7 @@ class PersonalForm extends React.Component {
 				    </MobileView>
 			    </div>
 		    </div>
-
+			
 		)
 	}
 }

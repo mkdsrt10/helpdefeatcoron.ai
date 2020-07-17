@@ -15,6 +15,14 @@ class GettingStarted extends React.Component {
         setTimeout(()=>{this.setState({visible: true})}, 25)
     }
 
+    letsGo = () => {
+        if (this.props.vitals === 1 && this.props.symptoms === 1 && this.props.personal === 1) {
+            this.props.onRouteChange("wait")
+        } else {
+            this.props.onRouteChange("vitals")
+        }
+    };
+
     render() {
       const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
@@ -40,7 +48,7 @@ class GettingStarted extends React.Component {
                     <CustomSVG />
                 </MobileView>
                 <div className="tc w-100 mt3 mb0">
-                    <p onClick={()=>onRouteChange("personal")} class="f4 tc grow no-underline pointer br-pill ph4 pv3 mb2 dib white bg-light-purple" style={{margin:"auto"}}>Let's Go!</p>
+                    <p onClick={this.letsGo} class="f4 tc grow no-underline pointer br-pill ph4 pv3 mb2 dib white bg-light-purple" style={{margin:"auto"}}>Let's Go!</p>
                 </div>
             </div>
         </div>

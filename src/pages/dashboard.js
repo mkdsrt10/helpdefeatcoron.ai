@@ -25,6 +25,7 @@ class Dashboard extends React.Component {
 		this.child = React.createRef()
 		this.state = {
 			path:"",
+			prevroute:"",
 			day: today_date,
 			month: today_month,
 			date: finaldate,
@@ -63,13 +64,19 @@ class Dashboard extends React.Component {
 			},
 			clientid: "",
 			data:"",
+			graphdata:"",
 		}
 	}
 
 	onRouteChange = (route) => {
-		this.setState({route: route});
+		this.setState({prevroute: this.state.route})
+		this.setState({route: route})
 		console.log(this.state)
 	};
+
+	changeGraphData = (data) => {
+		this.setState({graphdata: data})
+	}
 
 	vitalDone = () => {
 		this.setState({vitals: 1})
@@ -99,7 +106,11 @@ class Dashboard extends React.Component {
 		}})
 		console.log(this.state)
 		this.setState({symptoms: 1})
-		this.onRouteChange("vitals")
+		if (this.state.vitals==1 && this.state.personal==1) {
+			this.setState({route:"wait"})
+		} else {
+			this.onRouteChange("vitals")
+		}
 	};
 
 	onVitalsUpdate = (input) => {
@@ -279,12 +290,12 @@ class Dashboard extends React.Component {
 			if (this.state.vitals === 1 && this.state.personal === 1 && this.state.symptoms===1) {
 				this.setState({route: "pred"})
 			} else {
-				output = <GettingStarted Dated={this.state.day} Month={this.state.month} onRouteChange={this.onRouteChange}/>
+				output = <GettingStarted vitals={this.state.vitals} symptoms={this.state.symptoms} personal={this.state.personal} Dated={this.state.day} Month={this.state.month} onRouteChange={this.onRouteChange}/>
 			}
 		} else if (this.state.route === "pred") {
 			output=(
 				<div>
-					<Prediction Dated={this.state.day} Month={this.state.month} data="high risk"/>
+					<Prediction Dated={this.state.day} Month={this.state.month} data={this.state.data}/>
 				</div>
 			)
 		}
@@ -296,7 +307,7 @@ class Dashboard extends React.Component {
 					  <div style={{"min-width":"290px"}}>
 					  	{back}
 					  	<List symptoms = {this.state.symptoms} personal = {this.state.personal} vitals = {this.state.vitals} onRouteChange={this.onRouteChange} route={this.state.route}/>
-					  	<Table clientid={this.state.clientid} ref = {this.child} onDateChange={this.onDateChange} daily={this.state.daily} personal = {this.state.personal} vitals = {this.state.vitals} vitalDone={this.vitalDone} personalDone={this.personalDone} symptomsDone={this.symptomsDone}/>
+					  	<Table clientid={this.state.clientid} ref = {this.child} onDateChange={this.onDateChange} symptoms={this.state.symptoms} personal = {this.state.personal} vitals = {this.state.vitals} vitalDone={this.vitalDone} personalDone={this.personalDone} symptomsDone={this.symptomsDone}/>
 					  </div>
 					  <div className="ml3" style={{width:"700px"}}>
 					    {output}
@@ -306,7 +317,7 @@ class Dashboard extends React.Component {
 				<MobileView>
 					<div style={{"margin":"auto", display: 'flex', flexDirection: 'row'}}>
 						<List symptoms = {this.state.symptoms} personal = {this.state.personal} vitals = {this.state.vitals} onRouteChange={this.onRouteChange} route={this.state.route}/>
-						<Table clientid={this.state.clientid} ref = {this.child} onDateChange={this.onDateChange} daily={this.state.daily} personal = {this.state.personal} vitals = {this.state.vitals} vitalDone={this.vitalDone} personalDone={this.personalDone} symptomsDone={this.symptomsDone}/>
+						<Table clientid={this.state.clientid} ref = {this.child} onDateChange={this.onDateChange} symptoms={this.state.symptoms} personal = {this.state.personal} vitals = {this.state.vitals} vitalDone={this.vitalDone} personalDone={this.personalDone} symptomsDone={this.symptomsDone}/>
 					</div>
 					<div style={{"margin":"auto","margin-top":"10px","padding-bottom":"50px"}}>
 						{output}

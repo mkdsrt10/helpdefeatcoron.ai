@@ -72,7 +72,7 @@ class VitalForm extends React.Component {
 		};
 		const requestOptions = {
 			    method: 'POST',
-			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': true },
+			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
 		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/postvitals?', requestOptions)
@@ -82,7 +82,10 @@ class VitalForm extends React.Component {
 				setTimeout(()=>{this.props.onVitalsUpdate(this.state)},500)
 				setTimeout(()=>{this.props.refreshCalendar()},500)
 	        })
-	        .catch(err=>console.log(err))
+	        .catch(err=>{
+				this.setState({message:""})
+				this.setState({error_message: "An error occured. Please try again."})
+			})
 	};
 
 	updateSentData = () => {
@@ -99,7 +102,7 @@ class VitalForm extends React.Component {
 		};
 		const requestOptions = {
 			    method: 'POST',
-			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': true },
+			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
 		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/updatevitals1?', requestOptions)
@@ -109,7 +112,10 @@ class VitalForm extends React.Component {
 				setTimeout(()=>{this.props.onVitalsUpdate(this.state)},500)
 				setTimeout(()=>{this.props.refreshCalendar()},500)
 	        })
-	        .catch(err=>console.log(err))
+	        .catch(err=>{
+				this.setState({message:""})
+				this.setState({error_message: "An error occured. Please try again."})
+			})
 
 	}
 

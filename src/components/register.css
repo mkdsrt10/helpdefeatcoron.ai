@@ -76,6 +76,11 @@ body, html {
 
 @media only screen and (max-width: 600px) {
     .mobileOptimize {
-        padding: 2rem 1rem;
+        padding: 2rem 1rem !important;
+        padding-right: 0rem !important;
+    }
+    .mobileFont{
+        font-size: 100%;
+        height: 36px !important;
     }
 }

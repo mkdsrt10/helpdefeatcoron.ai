@@ -44,7 +44,7 @@ const List = ({vitals, personal, symptoms, onRouteChange, route}) => {
 	let output;
 	if (route !== "pred") {
 		output= (
-			<div>
+			<div style={{"font-family":"Avenir", flex: 1}}>
 				{z}
 			</div>
 		)

@@ -175,18 +175,18 @@ class Table extends React.Component {
 				</div>
 			  <div className="calender-grid">
 			  	<div className="gray ph2 tc pv4 mr2 bg-washed-green br-pill" style={{height:"270px"}}>
-			  		<p onClick={this.onDateClick} id={this.state.dates[0]} className={`pa2 pointer mt0 ${(this.state.current == this.state.dates[0]) ? "b--light-gray shadow-2 purple ba br-100" : ""} mb1`}>{this.state.dates[0]}</p>
-			  		<p onClick={this.onDateClick} id={this.state.dates[1]} className={`pa2 pointer ${(this.state.current == this.state.dates[1]) ? "b--light-gray shadow-2 purple ba br-100" : ""} mv1`}>{this.state.dates[1]}</p>
-			  		<p onClick={this.onDateClick} id={this.state.dates[2]} className={`pa2 pointer ${(this.state.current == this.state.dates[2]) ? "b--light-gray shadow-2 purple ba br-100" : ""} mv1`}>{this.state.dates[2]}</p>
-			  		<p onClick={this.onDateClick} id={this.state.dates[3]} className={`pa2 pointer ${(this.state.current == this.state.dates[3]) ? "b--light-gray shadow-2 purple ba br-100" : ""} mv1`}>{this.state.dates[3]}</p>
-			  		<p onClick={this.onDateClick} id={this.state.dates[4]} className={`pa2 pointer ${(this.state.current == this.state.dates[4]) ? "b--light-gray shadow-2 purple ba br-100" : ""} mv1`}>{this.state.dates[4]}</p>
+			  		<p onClick={this.onDateClick} id={this.state.dates[0]} className={`pa2 mobileFont pointer mt0 ${(this.state.current == this.state.dates[0]) ? "b--light-gray shadow-2 purple ba br-100" : ""} mb1`}>{this.state.dates[0]}</p>
+			  		<p onClick={this.onDateClick} id={this.state.dates[1]} className={`pa2 mobileFont pointer ${(this.state.current == this.state.dates[1]) ? "b--light-gray shadow-2 purple ba br-100" : ""} mv1`}>{this.state.dates[1]}</p>
+			  		<p onClick={this.onDateClick} id={this.state.dates[2]} className={`pa2 mobileFont pointer ${(this.state.current == this.state.dates[2]) ? "b--light-gray shadow-2 purple ba br-100" : ""} mv1`}>{this.state.dates[2]}</p>
+			  		<p onClick={this.onDateClick} id={this.state.dates[3]} className={`pa2 mobileFont pointer ${(this.state.current == this.state.dates[3]) ? "b--light-gray shadow-2 purple ba br-100" : ""} mv1`}>{this.state.dates[3]}</p>
+			  		<p onClick={this.onDateClick} id={this.state.dates[4]} className={`pa2 mobileFont pointer ${(this.state.current == this.state.dates[4]) ? "b--light-gray shadow-2 purple ba br-100" : ""} mv1`}>{this.state.dates[4]}</p>
 			  	</div>
 			  	<div className='pl0 pv4 br-pill' style={{height:"270px"}}>
-			  		<p className="pv2 mt0 mb1 purple br-100" style={{color: this.colorChoose(this.state.status[0])}}>{this.state.status[0]}</p>
-			  		<p className="pv2 mv1" style={{color: this.colorChoose(this.state.status[1])}}>{this.state.status[1]}</p>
-			  		<p className="pv2 mv1" style={{color: this.colorChoose(this.state.status[2])}}>{this.state.status[2]}</p>
-			  		<p className="pv2 mv1" style={{color: this.colorChoose(this.state.status[3])}}>{this.state.status[3]}</p>
-			  		<p className="pv2 mv1" style={{color: this.colorChoose(this.state.status[4])}}>{this.state.status[4]}</p>
+			  		<p className="pv2 mt0 mb1 purple br-100 mobileFont" style={{color: this.colorChoose(this.state.status[0])}}>{this.state.status[0]}</p>
+			  		<p className="pv2 mv1 mobileFont" style={{color: this.colorChoose(this.state.status[1])}}>{this.state.status[1]}</p>
+			  		<p className="pv2 mv1 mobileFont" style={{color: this.colorChoose(this.state.status[2])}}>{this.state.status[2]}</p>
+			  		<p className="pv2 mv1 mobileFont" style={{color: this.colorChoose(this.state.status[3])}}>{this.state.status[3]}</p>
+			  		<p className="pv2 mv1 mobileFont" style={{color: this.colorChoose(this.state.status[4])}}>{this.state.status[4]}</p>
 			  	</div>
 			  </div>
 			</div>

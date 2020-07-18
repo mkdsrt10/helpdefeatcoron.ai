@@ -339,7 +339,7 @@ class Dashboard extends React.Component {
 					</div>
 					</BrowserView>
 				<MobileView>
-					<div style={{"margin":"auto", display: 'flex', flexDirection: 'row'}}>
+					<div style={{"margin":"auto", display: 'flex', flexDirection: 'row', flex: 1}}>
 						<List symptoms = {this.state.symptoms} personal = {this.state.personal} vitals = {this.state.vitals} onRouteChange={this.onRouteChange} route={this.state.route}/>
 						<Table clientid={this.state.clientid} ref = {this.child} onDateChange={this.onDateChange} daily={this.state.daily} personal = {this.state.personal} vitals = {this.state.vitals} vitalDone={this.vitalDone} personalDone={this.personalDone} symptomsDone={this.symptomsDone}/>
 					</div>

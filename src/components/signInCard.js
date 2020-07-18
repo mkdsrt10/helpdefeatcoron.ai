@@ -120,9 +120,9 @@ class SignInCard extends React.Component {
 				    <span class="pr1"> Sign Up </span>
 				</p>
 				<br/>
-				<p class="f4 tc no-underline bg-animate bg-purple light-gray inline-flex pointer mb3 items-center grow mt4 bg-white black pa3 ph4 br3" style={{"margin-left":"auto"}}>
-				    <span> Invite Others </span>
-				</p>
+				{/*<p class="f4 tc no-underline bg-animate bg-purple light-gray inline-flex pointer mb3 items-center grow mt4 bg-white black pa3 ph4 br3" style={{"margin-left":"auto"}}>*/}
+				{/*    <span> Invite Others </span>*/}
+				{/*</p>*/}
 			</div>
 		);
 	}

@@ -38,7 +38,7 @@ class Settings extends React.Component {
 						this.setState(res)
 						let allergies = this.state.allergies9
 						if (allergies.length === 0) {
-							this.setState({allergies9: "None"})	
+							this.setState({allergies9: "None"})
 						} else {
 							allergies = allergies.split(",")
 							console.log(allergies)
@@ -59,7 +59,7 @@ class Settings extends React.Component {
 						}
 						if (this.state.diabetes) {
 							history = history + "Diabetes, "
-						} 
+						}
 						if (this.state.heartdisease) {
 							history = history + "Heart Disease, "
 						}
@@ -99,20 +99,20 @@ class Settings extends React.Component {
 					.catch(err => console.log(err))
 					})
 			.catch(err => navigate("/"))
-		
+
 	}
 
 	render() {
 		return(
 			<div>
 				<Navbar path={this.state.path}/>
-				<div style={{width: (isMobile) ? "90vw" : "700px", margin:"auto"}}>
+				<div style={{width: (isMobile) ? "100vw" : "700px", margin:"auto"}}>
 					<div className="tl ba bw1 w-100 pb4 b--light-gray bg-white ba Avenir" style={{"font-family":"Avenir"}}>
 						<div className="w-100 mb3 bb bw1 b--light-gray">
 		            	  <p className={`f5 ${(isMobile)?"ml4":"ml5"} mb3 mt3 light-red dib`} style={{"margin-right":"10rem"}}>YOUR PROFILE</p>
 		        	    </div>
 		        	    <div className={`pa4 ${(isMobile) ? "" : "pl5"}`}>
-			        		<p className={`${(isMobile) ? "f4" : "f3"} mb4 dib`} style={{color:"rgb(127,79,180)"}}><b>Personal Details</b><span onClick={()=>navigate("/update-account", {state:{route: "personal", data: this.state}})} className="ml2 f6 gray underline-hover pointer dim">Edit</span></p>			        		
+			        		<p className={`${(isMobile) ? "f4" : "f3"} mb4 dib`} style={{color:"rgb(127,79,180)"}}><b>Personal Details</b><span onClick={()=>navigate("/update-account", {state:{route: "personal", data: this.state}})} className="ml2 f6 gray underline-hover pointer dim">Edit</span></p>
 			        		<p className={`${(isMobile) ? "f6" : "f5"} mt2 b mb0 gray`}>{this.state.firstname} {this.state.lastname}</p>
 			        		<p className={`${(isMobile) ? "f6" : "f5"} mt3 mb0 gray`}><b>Email</b>: {this.state.email}</p>
 			        		<div>
@@ -130,7 +130,7 @@ class Settings extends React.Component {
 			        		<p className={`${(isMobile) ? "f6" : "f5"} w-70 mt2 mb0 gray`}>{this.state.history}</p>
 			        	</div>
 		        	</div>
-		        	
+
 				</div>
 			</div>
 		);

@@ -1,6 +1,6 @@
 import React from "react"
 import "./register.css"
-import {  
+import {
   isBrowser,
   isMobile
 } from "react-device-detect";
@@ -76,14 +76,14 @@ class SignInCard extends React.Component {
 			if (this.state.email === "email" || this.state.email==="" || this.state.pass==="" || this.state.pass === "pass") {
 				this.setState({error: "Please fill in all the details!"})
 			} else if (validator.validate(this.state.email) !== true) {
-				this.setState({error: "Email format incorrect."})			
+				this.setState({error: "Email format incorrect."})
 			} else {
 				this.SignIn()
 			}
 		}
 		return(
-			<div className="w-100 shadow-3 pa2 pt0 pb4 tc bg-white ba b--light-gray Avenir ml4" style={{width: (isMobile) ? "90vw" : "650px"}}>
-				<p className={`${(isMobile) ? "f2" : "f1"} mt5`} style={{color: "rgb(127,90,179)"}}>CORONA.AI</p>
+			<div className={!isMobile?"w-100 shadow-3 pa2 pt0 pb4 tc bg-white ba b--light-gray Avenir ml4":""} style={{width: (isMobile) ? "100vw" : "650px"}}>
+				<p className={`${(isMobile) ? "f2" : "f1"} mt5`} style={{color: "rgb(127,90,179)"}}>HelpDefeatCorona</p>
 				<p className={`${(isMobile) ? "f5" : "f4"} w-60 tc gray mt4 mb5`} style={{"margin-left":"auto", "margin-right":"auto", "font-weight":"500"}}>Please Sign In or Create an Account</p>
 				<div className="tl" style={{ fontSize: (isMobile) ? 18 : 24, padding:"20px 20px", "border-radius":"15px", width:"75%", "margin-top":"20px", "margin":"auto"}}>
 		            <FloatingLabelInput
@@ -91,7 +91,7 @@ class SignInCard extends React.Component {
 		              label="Email ID"
 		              placeholder=""
 		              value={this.state.email}
-		              onChange={this.onEmailEnter}		        
+		              onChange={this.onEmailEnter}
 		            />
 		        </div>
 		        <div className="tl" style={{ fontSize: (isMobile) ? 18 : 24, padding:"20px 20px", "border-radius":"15px", width:"75%", "margin-top":"20px", "margin":"auto"}}>
@@ -101,7 +101,7 @@ class SignInCard extends React.Component {
 		              placeholder=""
 		              value={this.state.pass}
 		              type="password"
-		              onChange={this.onPassEnter}		        
+		              onChange={this.onPassEnter}
 		            />
 		        </div>
 				<p className="f5 b red">{this.state.error}</p>

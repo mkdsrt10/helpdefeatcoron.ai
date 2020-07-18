@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core'
 import FloatingLabelInput from 'react-floating-label-input';
 import "./register.css"
 import Tabs from 'react-bootstrap/Tabs'
-import {  
+import {
   isBrowser,
   isMobile
 } from "react-device-detect";
@@ -20,7 +20,7 @@ schema
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
 .has().digits()
-.has().symbols()                                
+.has().symbols()
 .has().not().spaces()                           // Should not have spaces
 
 class Register1 extends React.Component {
@@ -48,7 +48,7 @@ class Register1 extends React.Component {
 		console.log(e.target.value)
 	}
 
-	
+
 	onOptionClick = (e) => {
 		this.setState({gender: e.target.id})
 		console.log(e.target.id)
@@ -87,7 +87,7 @@ class Register1 extends React.Component {
 			onAccountSubmit(this.state)
 		}
 		return(
-			<div className={`shadow-3 tl b--light-gray pb4 pt3 mb3 bg-white ba Avenir`} style={{margin:"auto", "margin-bottom":"40px","font-family":"Avenir", width: (isMobile) ? "85vw" : "700px"}}>
+			<div className={`shadow-3 tl b--light-gray pb4 pt3 mb3 bg-white ba Avenir`} style={{margin:"auto", "margin-bottom":"40px","font-family":"Avenir", width: (isMobile) ? "100vw" : "700px"}}>
 				<div className={`${(isMobile) ? "ph4" : "ph5"}`}>
 					<p className={`ml3 mt4 gray mb3 ${(isMobile) ? "f2" : "f1"}`}>ACCOUNT</p>
 					<p className={`f6 ml3 mt2 gray mb3 ${(isMobile) ? "w-80" : "w-60"}`}>Please enter your details. Make sure your password is atleast 8 characters long and contains uppercase, lowercase, numeric and special characters.</p>
@@ -96,7 +96,7 @@ class Register1 extends React.Component {
 			            <FloatingLabelInput
 			              id="firstname"
 			              label="First Name"
-			              placeholder={this.state.firstname}		         
+			              placeholder={this.state.firstname}
 			              onChange={this.onTypeEnter}
 			              style={{background:"rgb(243,245,248)"}}
 			            />

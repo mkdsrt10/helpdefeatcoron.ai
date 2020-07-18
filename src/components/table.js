@@ -22,6 +22,8 @@ class Table extends React.Component {
 	}
 
 	componentDidMount() {
+		console.log("HJJJ");
+		this.setState({current: dated})
 		Auth.currentAuthenticatedUser()
 			.then(res => {
 				this.setState({clientid: res.username})

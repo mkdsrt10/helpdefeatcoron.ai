@@ -1,7 +1,7 @@
 import React from "react"
 import "./register.css"
 import FloatingLabelInput from 'react-floating-label-input';
-import {  
+import {
   isBrowser,
   isMobile
 } from "react-device-detect";
@@ -34,7 +34,7 @@ class Register2 extends React.Component {
     let arr = this.state.others
     if (arr.includes(e.target.id)) {
       arr.splice(arr.indexOf(e.target.id), 1)
-    } 
+    }
     this.setState({others: arr})
     console.log(this.state.others)
   }
@@ -65,7 +65,7 @@ class Register2 extends React.Component {
     let arr = this.state.others
     let output = arr.map(x => <p onClick={this.onOtherClick} id={x} className={`${(isMobile) ? "f5" : "f4"} pointer ml2 br2 ph4 pv3 mb0 mt0 dib`} style={{background: this.state.others.indexOf(x) !== -1 ? this.state.on_color : this.state.off_color, color: this.state.others.includes(x) ? "white" : "gray"}}>{x}</p>)
 		return(
-			<div className={`shadow-3 tl b--light-gray ${(isMobile) ? "ph4" : "ph5"} pb4 bg-white ba Avenir`} style={{margin:"auto", "font-family":"Avenir", width:(isMobile) ? "85vw" : "700px"}}>
+			<div className={`shadow-3 tl b--light-gray ${(isMobile) ? "ph4" : "ph5"} pb4 bg-white ba Avenir`} style={{margin:"auto", "font-family":"Avenir", width:(isMobile) ? "100vw" : "700px"}}>
 				<p className={`${(isMobile) ? "f2" : "f1"} ml3 mt4 gray mb3`}>ALLERGIES</p>
         <p className={`f5 ml3 mt2 gray mb4 ${(isMobile) ? "w-80" : "w-50"}`}>You would be surprised how much this information helps</p>
         <div className="grid-box pa0 w-100 ma0">

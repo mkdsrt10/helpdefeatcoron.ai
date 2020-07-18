@@ -259,7 +259,7 @@ class Dashboard extends React.Component {
 
 	refreshCalendar = () => {
 		this.child.current.refreshCal()
-	}
+	};
 
 	render() {
 		let output;
@@ -346,7 +346,8 @@ class Dashboard extends React.Component {
 					{/*<div style={{width:"350px", margin:"auto"}}>*/}
 					{/**/}
 					{/*</div>*/}
-					<div style={{"margin":"auto","margin-top":"10px","padding-bottom":"50px", width: "90vw"}}>
+					{back}
+					<div style={{"margin":"10px auto auto auto","padding-bottom":"50px"}}>
 						{output}
 					</div>
 				</MobileView>

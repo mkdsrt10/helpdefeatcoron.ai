@@ -1,6 +1,6 @@
 import React from "react"
 import {navigate} from "gatsby"
-import {  
+import {
   isBrowser,
   isMobile
 } from "react-device-detect";
@@ -31,7 +31,7 @@ class Register4 extends React.Component {
 
 	render() {
 		return(
-			<div className="shadow-3 tc b--light-gray ph5 pb4 bg-white ba Avenir" style={{margin:"auto", "font-family":"Avenir", width: (isMobile) ? "85vw" : "700px"}}>
+			<div className="shadow-3 tc b--light-gray ph5 pb4 bg-white ba Avenir" style={{margin:"auto", "font-family":"Avenir", width: (isMobile) ? "100vw" : "700px"}}>
 				<p className="f2 mt4 dark-green mb3 ">JUST A MOMENT</p>
 				<p className="f4 w-70 mt2 gray" style={{"margin":"auto"}}>Please wait while we set up your account.</p>
 				<p className="f4 w-70 mt2 b gray" style={{"margin":"auto"}}>Note: Please verify your email and then sign in to access your dashboard</p>

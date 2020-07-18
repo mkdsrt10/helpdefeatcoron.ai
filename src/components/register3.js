@@ -1,6 +1,6 @@
 import React from "react"
 import "./register.css"
-import {  
+import {
   BrowserView,
   MobileView,
   isMobile,
@@ -58,9 +58,9 @@ class Register3 extends React.Component {
         onFinalSubmit(this.state)
       }
     }
-    
+
 		return(
-			<div className={`shadow-3 tl b--light-gray ${(isMobile) ? "ph4" : "ph5"} pb4 bg-white ba Avenir`} style={{margin:"auto", "font-family":"Avenir", width:(isMobile) ? "85vw" : "700px"}}>
+			<div className={`shadow-3 tl b--light-gray ${(isMobile) ? "ph4" : "ph5"} pb4 bg-white ba Avenir`} style={{margin:"auto", "font-family":"Avenir", width:(isMobile) ? "100vw" : "700px"}}>
 			  <p className={`${(isMobile) ? "f2" : "f1"} ml3 mt4 gray mb3`}>MEDICAL HISTORY</p>
         <p className={`f5 ml3 mt2 gray mb4 ${(isMobile) ? "w-90" : "w-50"}`}>Click the boxes that apply to you</p>
         <BrowserView>
@@ -74,9 +74,9 @@ class Register3 extends React.Component {
               <p onClick={this.onClick2} id="n2" className="f7 mb0 mt1">(dementia, a stroke, seizures or a brain injury)</p>
             </div>
             <p onClick={this.onClick} id="blood_pressure" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.blood_pressure ? this.state.on_color : this.state.off_color, color: this.state.blood_pressure ? "white" : "gray"}}>HIGH BLOOD PRESSURE</p>
-            <p onClick={this.onClick} id="kidney_liver" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.kidney_liver ? this.state.on_color : this.state.off_color, color: this.state.kidney_liver ? "white" : "gray"}}>KIDNEY/LIVER FAILURE</p> 
+            <p onClick={this.onClick} id="kidney_liver" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.kidney_liver ? this.state.on_color : this.state.off_color, color: this.state.kidney_liver ? "white" : "gray"}}>KIDNEY/LIVER FAILURE</p>
             <p onClick={this.onClick} id="lung_disease" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.lung_disease ? this.state.on_color : this.state.off_color, color: this.state.lung_disease ? "white" : "gray"}}>LUNG DISEASE</p>
-            <p onClick={this.onClick} id="diabetes" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.diabetes ? this.state.on_color : this.state.off_color, color: this.state.diabetes ? "white" : "gray"}}>DIABETES</p>   
+            <p onClick={this.onClick} id="diabetes" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.diabetes ? this.state.on_color : this.state.off_color, color: this.state.diabetes ? "white" : "gray"}}>DIABETES</p>
             <p onClick={this.onClick} id="cancer" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.cancer ? this.state.on_color : this.state.off_color, color: this.state.cancer ? "white" : "gray"}}>CANCER</p>
             <p onClick={this.onClick} id="smoker" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.smoker ? this.state.on_color : this.state.off_color, color: this.state.smoker ? "white" : "gray"}}>SMOKER</p>
             <div onClick={this.onClick} id="weak_immunity" className="tl f4 pointer ml2 br2 ph4 pv3 mb0 mt0 dib" style={{background: this.state.weak_immunity ? this.state.on_color : this.state.off_color, color: this.state.weak_immunity ? "white" : "gray"}}>
@@ -101,9 +101,9 @@ class Register3 extends React.Component {
               <p onClick={this.onClick2} id="n2" className="f7 mb0 ph3 mt1">(dementia, a stroke, seizures or a brain injury)</p>
             </div>
             <p onClick={this.onClick} id="blood_pressure" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 dib" style={{background: this.state.blood_pressure ? this.state.on_color : this.state.off_color, color: this.state.blood_pressure ? "white" : "gray"}}>HIGH BLOOD PRESSURE</p>
-            <p onClick={this.onClick} id="kidney_liver" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 dib" style={{background: this.state.kidney_liver ? this.state.on_color : this.state.off_color, color: this.state.kidney_liver ? "white" : "gray"}}>KIDNEY/LIVER FAILURE</p> 
+            <p onClick={this.onClick} id="kidney_liver" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 dib" style={{background: this.state.kidney_liver ? this.state.on_color : this.state.off_color, color: this.state.kidney_liver ? "white" : "gray"}}>KIDNEY/LIVER FAILURE</p>
             <p onClick={this.onClick} id="lung_disease" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.lung_disease ? this.state.on_color : this.state.off_color, color: this.state.lung_disease ? "white" : "gray"}}>LUNG DISEASE</p>
-            <p onClick={this.onClick} id="diabetes" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.diabetes ? this.state.on_color : this.state.off_color, color: this.state.diabetes ? "white" : "gray"}}>DIABETES</p>   
+            <p onClick={this.onClick} id="diabetes" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.diabetes ? this.state.on_color : this.state.off_color, color: this.state.diabetes ? "white" : "gray"}}>DIABETES</p>
             <p onClick={this.onClick} id="cancer" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.cancer ? this.state.on_color : this.state.off_color, color: this.state.cancer ? "white" : "gray"}}>CANCER</p>
             <p onClick={this.onClick} id="smoker" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.smoker ? this.state.on_color : this.state.off_color, color: this.state.smoker ? "white" : "gray"}}>SMOKER</p>
             <div onClick={this.onClick} id="weak_immunity" className="tc w-100 mb1 pointer ml1 br2 ph4 pv3 mb0 mt0 dib" style={{background: this.state.weak_immunity ? this.state.on_color : this.state.off_color, color: this.state.weak_immunity ? "white" : "gray"}}>
@@ -115,7 +115,7 @@ class Register3 extends React.Component {
           </div>
           <p onClick={onSubmit} className="pointer tc mt4 mb0 pv3 f3 shadow-1" style={{"margin-left": "auto","margin-right":"auto", "border-radius":"50%", width:"20%"}}>✓</p>
         </MobileView>
-        
+
       </div>
 		)
 	}

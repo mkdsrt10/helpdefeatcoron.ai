@@ -2,7 +2,7 @@ import React from "react"
 import "./register.css"
 
 const RegNav = ({route}) => {
-	let b_ac="b--light-gray" 
+	let b_ac="b--light-gray"
 	let b_al="b--light-gray"
 	let b_mh="b--light-gray"
 	if (route==="account") {
@@ -22,8 +22,8 @@ const RegNav = ({route}) => {
 	return(
 		<div className="tc flex mt1 mb0">
 			<p className={`dib pb2 bb bw1 tc mb2 ${b_ac}`}>Account Details</p>
-			<p className={`dib pb2 bb bw1 tc ml5 mb2 ${b_al}`}>Allergies</p>
-			<p className={`dib pb2 bb bw1 tc ml5 mb2 ${b_mh}`}>Medical History</p>
+			<p className={`dib pb2 bb bw1 tc ml4 mb2 ${b_al}`}>Allergies</p>
+			<p className={`dib pb2 bb bw1 tc ml4 mb2 ${b_mh}`}>Medical History</p>
 		</div>
 	)
 }

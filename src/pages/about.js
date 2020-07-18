@@ -59,7 +59,7 @@ class About extends React.Component {
 					</div>
 				</BrowserView>
 				<MobileView>
-					<div style={{width:"90vw", margin:"auto", "margin-top":"30px"}}>
+					<div style={{margin:"auto", "margin-top":"30px"}}>
 						<article class="pb4 w-100 Avenir shadow-4 hidden ba b--black-10">
 						  <h1 class="f6 bg-white br3 br--top gray mv0 pv3 ph5">OUR UNIQUE APPROACH</h1>
 						  <div class="pl4 pb2 pt3 bt b--black-10">

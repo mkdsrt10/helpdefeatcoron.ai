@@ -45,7 +45,9 @@ class GettingStarted extends React.Component {
                 <MobileView>
                     <p className="ml4 mt4 mb0 w-80 f2 tc" style={{"font-weight":"500", color: "rgb(127,90,179)", "line-height":"1.6"}}>Please enter your vitals and other details to view the prediction.</p>
                     {/*<img className="ml4 w-80" src="https://i.ibb.co/hFd0T7s/circle-cropped.png"/>*/}
-                    <CustomSVG/>
+                    <div style={{display: "flex", justifyContent: 'center'}}>
+                        <CustomSVG/>
+                    </div>
                 </MobileView>
                 <div className="tc w-100 mt3 mb0">
                     <p onClick={this.letsGo} class="f4 tc grow no-underline pointer br-pill ph4 pv3 mb2 dib white bg-light-purple" style={{margin:"auto"}}>Let's Go!</p>

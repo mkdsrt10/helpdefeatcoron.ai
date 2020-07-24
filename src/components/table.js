@@ -7,7 +7,11 @@ Amplify.configure(awsconfig);
 var x
 let datestring
 var dated = new Date()
+var month = dated.getMonth()
 dated = dated.getDate()
+const monthNames = ["January", "February", "March", "April", "May", "June",
+		  "July", "August", "September", "October", "November", "December"];
+
 class Table extends React.Component {
 	constructor(props) {
 		super(props)
@@ -16,6 +20,7 @@ class Table extends React.Component {
 			status: ["INCOMPLETE","INCOMPLETE","INCOMPLETE","INCOMPLETE","INCOMPLETE"],
 			fetched: [],
 			current: dated,
+			current_month: month
 			clientid:"",
 			done: [0,0,0,0,0],
 		}
@@ -114,8 +119,10 @@ class Table extends React.Component {
 		var thismonth = thisday.getMonth()
 		if (e.target.id > thisdate) {
 			onDateChange(e.target.id, thismonth)
+			this.setState({current_month: thismonth})
 		} else {
 			onDateChange(e.target.id, thismonth+1)
+			this.setState({current_month: thismonth + 1})
 		}
 		for (let i=0; i < 5; i++) {
 				if (this.state.dates[i] == e.target.id) {
@@ -170,7 +177,7 @@ class Table extends React.Component {
 		return(
 			<div className="mt3 tl b--light-gray pa4 bg-white Avenir mobileOptimize" style={{"font-family":"Avenir", flex: 1}}>
 				<div>
-					<p className="f4 mt3 mb2 dark-gray">YOUR RECENT HISTORY</p>
+					<p className="f4 mt3 mb2 dark-gray">{monthNames[this.state.current_month + 1]}</p>
 					<p className="mb3 gray">You can update the data by clicking on date below</p>
 				</div>
 			  <div className="calender-grid">

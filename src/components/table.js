@@ -20,7 +20,7 @@ class Table extends React.Component {
 			status: ["INCOMPLETE","INCOMPLETE","INCOMPLETE","INCOMPLETE","INCOMPLETE"],
 			fetched: [],
 			current: dated,
-			current_month: month
+			current_month: month,
 			clientid:"",
 			done: [0,0,0,0,0],
 		}

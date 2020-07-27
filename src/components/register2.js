@@ -80,7 +80,7 @@ class Register2 extends React.Component {
                   style={{background:"rgb(243,245,248)"}}
                 />
         </div>
-        <div className="grid-box pa0 w-100 ma0">
+        <div className="grid-box pa0 w-100 ma0 mt4">
           {output}
         </div>
         <p className="f4 mt4 red tc">{this.state.error}</p>

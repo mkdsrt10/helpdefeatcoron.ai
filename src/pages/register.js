@@ -34,7 +34,7 @@ class Register extends React.Component {
       		kidneyliverfailure: false,
       		cancer: false,
       		smoker: false,
-      		pregnant: false,
+      		asthma: false,
       		severeobesity: false,
       		weakenedimmunity: false,
 		}
@@ -72,7 +72,7 @@ class Register extends React.Component {
 			this.setState({severeobesity: data.obesity})
 			this.setState({lungdisease: data.lung_disease})
 			this.setState({cancer: data.cancer})
-			this.setState({pregnant: data.pregnant})
+			this.setState({asthma: data.asthma})
 			this.setState({smoker: data.smoker})
 			this.setState({weakenedimmunity: data.weak_immunity})
 			this.setState({neurologicaldisease: data.neuro_disease})

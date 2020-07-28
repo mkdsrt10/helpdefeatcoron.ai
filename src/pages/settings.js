@@ -75,13 +75,13 @@ class Settings extends React.Component {
 						if (this.state.neurologicaldisease) {
 							history = history + "Neurological Disease, "
 						}
-						if (this.state.pregnant) {
-							history = history + "Pregnant, "
+						if (this.state.asthma) {
+							history = history + "Asthma, "
 						}
 						if (this.state.severeobesity) {
 							history = history + "Obese, "
 						}
-						if (this.state.smoker) {
+						if (this.state.smoker !== 0) {
 							history = history + "Smoker, "
 						}
 						if (this.state.weakenedimmunity) {

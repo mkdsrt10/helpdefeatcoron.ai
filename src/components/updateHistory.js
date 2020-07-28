@@ -22,6 +22,13 @@ class UpdateHistory extends React.Component {
     console.log(e.target.id)
     console.log(!x)
   }
+  
+  onClickSmoke = (e) => {
+    let x = this.state[e.target.id]
+    if (x === 0) this.setState({[e.target.id]: 2});
+    else this.setState({[e.target.id]: 0});
+    console.log(e.target.id)
+  }
 
   onClick2 = (e) => {
     let x = e.target.id
@@ -65,13 +72,13 @@ class UpdateHistory extends React.Component {
             <p onClick={this.onClick} id="lungdisease" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.lungdisease ? this.state.on_color : this.state.off_color, color: this.state.lungdisease ? "white" : "gray"}}>LUNG DISEASE</p>
             <p onClick={this.onClick} id="diabetes" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.diabetes ? this.state.on_color : this.state.off_color, color: this.state.diabetes ? "white" : "gray"}}>DIABETES</p>   
             <p onClick={this.onClick} id="cancer" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.cancer ? this.state.on_color : this.state.off_color, color: this.state.cancer ? "white" : "gray"}}>CANCER</p>
-            <p onClick={this.onClick} id="smoker" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.smoker ? this.state.on_color : this.state.off_color, color: this.state.smoker ? "white" : "gray"}}>SMOKER</p>
+            <p onClick={this.onClickSmoke} id="smoker" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.smoker !== 0 ? this.state.on_color : this.state.off_color, color: this.state.smoker !== 0 ? "white" : "gray"}}>SMOKER</p>
             <div onClick={this.onClick} id="weakenedimmunity" className="tl f4 pointer ml2 br2 ph4 pv3 mb0 mt0 dib" style={{background: this.state.weakenedimmunity ? this.state.on_color : this.state.off_color, color: this.state.weakenedimmunity ? "white" : "gray"}}>
               <p onClick={this.onClick2} id="w1" className="mv0 f4">WEAKENED IMMUNITY DUE TO DISEASE</p>
               <p onClick={this.onClick2} id="w2" className="f7 mb0 mt1">(HIV, sickle cell), or medications (steroid pills)</p>
             </div>
             <div>
-              <p onClick={this.onClick} id="pregnant" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{width: "97%", background: this.state.pregnant ? this.state.on_color : this.state.off_color, color: this.state.pregnant ? "white" : "gray"}}>PREGNANT</p>
+              <p onClick={this.onClick} id="asthma" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{width: "97%", background: this.state.asthma ? this.state.on_color : this.state.off_color, color: this.state.asthma ? "white" : "gray"}}>ASTHMA</p>
               <p onClick={this.onClick} id="severeobesity" className="tl mt3 f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{width: "97%", background: this.state.severeobesity ? this.state.on_color : this.state.off_color, color: this.state.severeobesity ? "white" : "gray"}}>OBESITY (XXL+)</p>
             </div>
           </div>
@@ -92,12 +99,12 @@ class UpdateHistory extends React.Component {
             <p onClick={this.onClick} id="lungdisease" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.lung_disease ? this.state.on_color : this.state.off_color, color: this.state.lung_disease ? "white" : "gray"}}>LUNG DISEASE</p>
             <p onClick={this.onClick} id="diabetes" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.diabetes ? this.state.on_color : this.state.off_color, color: this.state.diabetes ? "white" : "gray"}}>DIABETES</p>   
             <p onClick={this.onClick} id="cancer" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.cancer ? this.state.on_color : this.state.off_color, color: this.state.cancer ? "white" : "gray"}}>CANCER</p>
-            <p onClick={this.onClick} id="smoker" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.smoker ? this.state.on_color : this.state.off_color, color: this.state.smoker ? "white" : "gray"}}>SMOKER</p>
+            <p onClick={this.onClickSmoke} id="smoker" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.smoker !== 0 ? this.state.on_color : this.state.off_color, color: this.state.smoker !== 0 ? "white" : "gray"}}>SMOKER</p>
             <div onClick={this.onClick} id="weakenedimmunity" className="tc w-100 mb1 pointer ml1 br2 ph4 pv3 mb0 mt0 dib" style={{background: this.state.weak_immunity ? this.state.on_color : this.state.off_color, color: this.state.weak_immunity ? "white" : "gray"}}>
               <p onClick={this.onClick2} id="w1" className="ph3 mt0 mb1 f5">WEAKENED IMMUNITY DUE TO DISEASE</p>
               <p onClick={this.onClick2} id="w2" className="f7 ph3 mb0 mt1">(HIV, sickle cell), or medications (steroid pills)</p>
             </div>
-            <p onClick={this.onClick} id="pregnant" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.pregnant ? this.state.on_color : this.state.off_color, color: this.state.pregnant ? "white" : "gray"}}>PREGNANT</p>
+            <p onClick={this.onClick} id="asthma" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.asthma ? this.state.on_color : this.state.off_color, color: this.state.asthma ? "white" : "gray"}}>ASTHMA</p>
             <p onClick={this.onClick} id="severeobesity" className="tc w-100 mb1 f5 pointer ml1 br2 pv3 ph4 mb0 dib" style={{background: this.state.obesity ? this.state.on_color : this.state.off_color, color: this.state.obesity ? "white" : "gray"}}>OBESITY(XXL+)</p>
           </div>
           <p onClick={onSubmit} className={`br-100 purple ph3 pv3 shadow-2 pointer mt2`} style={{"margin":"auto", "margin-top":"20px", width: (isMobile) ? "15%" : "10%"}}>✓</p>

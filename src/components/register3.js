@@ -17,7 +17,7 @@ class Register3 extends React.Component {
       neuro_disease: false,
       kidney_liver: false,
       cancer: false,
-      smoker: false,
+      smoker: 0,
       pregnant: false,
       obesity: false,
       weak_immunity: false,
@@ -32,6 +32,13 @@ class Register3 extends React.Component {
     this.setState({[e.target.id]: !x})
     console.log(e.target.id)
     console.log(!x)
+  }
+  
+  onClickSmoke = (e) => {
+    let x = this.state[e.target.id]
+    if (x === 0) this.setState({[e.target.id]: 2});
+    else this.setState({[e.target.id]: 0});
+    console.log(e.target.id)
   }
 
   onClick2 = (e) => {
@@ -78,7 +85,7 @@ class Register3 extends React.Component {
             <p onClick={this.onClick} id="lung_disease" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.lung_disease ? this.state.on_color : this.state.off_color, color: this.state.lung_disease ? "white" : "gray"}}>LUNG DISEASE</p>
             <p onClick={this.onClick} id="diabetes" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.diabetes ? this.state.on_color : this.state.off_color, color: this.state.diabetes ? "white" : "gray"}}>DIABETES</p>
             <p onClick={this.onClick} id="cancer" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.cancer ? this.state.on_color : this.state.off_color, color: this.state.cancer ? "white" : "gray"}}>CANCER</p>
-            <p onClick={this.onClick} id="smoker" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.smoker ? this.state.on_color : this.state.off_color, color: this.state.smoker ? "white" : "gray"}}>SMOKER</p>
+            <p onClick={this.onClickSmoke} id="smoker" className="tl f4 pointer ml2 br2 pv3 ph4 mb0 dib" style={{background: this.state.smoker !== 0 ? this.state.on_color : this.state.off_color, color: this.state.smoker ? "white" : "gray"}}>SMOKER</p>
             <div onClick={this.onClick} id="weak_immunity" className="tl f4 pointer ml2 br2 ph4 pv3 mb0 mt0 dib" style={{background: this.state.weak_immunity ? this.state.on_color : this.state.off_color, color: this.state.weak_immunity ? "white" : "gray"}}>
               <p onClick={this.onClick2} id="w1" className="mv0 f4">WEAKENED IMMUNITY DUE TO DISEASE</p>
               <p onClick={this.onClick2} id="w2" className="f7 mb0 mt1">(HIV, sickle cell), or medications (steroid pills)</p>

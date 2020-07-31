@@ -201,7 +201,7 @@ class PersonalForm extends React.Component {
 					        <a onClick={this.onOptionClick} id="false" name="happy" className="ml2 mb3 mt1 dark-gray pointer ph3 pv2 dib" style={{"font-size": (this.state.happy === "false") ? "44px" : "40px", opacity: (this.state.happy === "false") ? "1" : "0.5"}}>🙁</a>
 				    	</div>
 				    	<div className="ma1">
-					        <p className="mt3 ml5 b mb1 gray gender">RATE YOUR PAIN ON A SCALE OF 1-10</p>
+					        <p className="mt3 ml5 b mb1 gray gender">DO YOU HAVE ANY PAIN? RATE YOUR PAIN ON A SCALE OF 1-10</p>
 					        <p className="mt3 ml5 b mb1 f6 gray gender">1 being no pain and 10 being intolerable pain</p>
 					        <input id="pain" onChange={this.onTypeEnter} value={parseInt(this.state.pain)} type="number" min="1" max="10" className="mt3 ml5 mr2 bg-washed-green tc" style={{"height":"50px", "width":"35%","border":"none"}}/>
 					    </div>
@@ -239,7 +239,7 @@ class PersonalForm extends React.Component {
 					        <a onClick={this.onOptionClick} id="false" name="happy" className="ml2 mb3 mt1 dark-gray pointer ph3 pv2 dib" style={{"font-size": this.state.happy === "false" ? "44px" : "40px", opacity: (this.state.happy === "false") ? "1" : "0.5"}}>🙁</a>
 				    	</div>
 				    	<div className="ma1 w-70">
-					        <p className="mt3 ml5 b f5 mb1 gray gender">RATE YOUR PAIN ON A SCALE OF 1-10</p>
+					        <p className="mt3 ml5 b f5 mb1 gray gender">DO YOU HAVE ANY PAIN? RATE YOUR PAIN ON A SCALE OF 1-10</p>
 					        <p className="mt3 ml5 b mb1 f6 gray gender">1 being no pain and 10 being intolerable pain</p>
 					        <input id="pain" onChange={this.onTypeEnter} value={parseInt(this.state.pain)} type="number" min="1" max="10" className="mt3 ml5 mr2 bg-washed-green tc" style={{"height":"50px", "width":"35%","border":"none"}}/>
 					    </div>

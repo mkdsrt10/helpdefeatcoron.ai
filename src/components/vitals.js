@@ -16,7 +16,7 @@ class VitalForm extends React.Component {
 			heart: "",
 			heart_rate: "",
 			oxygen: "",
-			respiratoryrate: 0,
+			respiratoryrate: "",
 			bp: "",
 			error_message:"",
 			bg: "white",
@@ -38,6 +38,7 @@ class VitalForm extends React.Component {
 	onTypeEnter = (e) => {
 		let x = e.target.value;
 		// x = x.toLowerCase()
+		console.log(x, typeof x, e.target.id);
 		this.setState({[e.target.id]: x})
 	}
 

@@ -10,6 +10,7 @@ class SymptomsForm extends React.Component {
 				vitals: "",
 				symptoms:"",
 				personal:"",
+				fever:false,
 				nose: false,
 				chills: false,
 				cough: false,
@@ -47,6 +48,7 @@ class SymptomsForm extends React.Component {
 				nose: false,
 				chills: false,
 				cough: false,
+				fever:false,
 				breath: false,
 				throat: false,
 				bodyache: false,
@@ -72,6 +74,7 @@ class SymptomsForm extends React.Component {
 		this.setState({message: ""})
 		this.setState({vitals: this.props.vitals})
 		this.setState({symptoms: this.props.symptoms})
+		this.setState({fever: this.props.fever})
 		this.setState({personal: this.props.personal})
 		setTimeout(()=>{this.setState({visible: true})}, 25)
 		let x = this.props.data
@@ -96,6 +99,7 @@ class SymptomsForm extends React.Component {
 			loss_taste_smell: this.state.loss_taste_smell,
 			chillsorsweating: this.state.chills,
 			coughing: this.state.cough,
+			fever: this.state.fever,
 			sorethroat: this.state.throat,
 			difficultybreathing: this.state.breath,
 			bodyaches: this.state.bodyache,
@@ -130,6 +134,7 @@ class SymptomsForm extends React.Component {
 		let senddata = {
 			loss_taste_smell: this.state.loss_taste_smell,
 			nose: this.state.nose,
+			fever: this.state.fever,
 			chillsorsweating: this.state.chills,
 			coughing: this.state.cough,
 			sorethroat: this.state.throat,
@@ -199,7 +204,8 @@ class SymptomsForm extends React.Component {
 			          <p onClick={this.onClick} id="throat" className="tl f5 pointer ml5 mr3 br2 pv3 ph4 mb0 dib" style={{background: this.state.throat ? this.state.on_color : this.state.off_color, color: this.state.throat ? "white" : "gray"}}>SORE THROAT</p>
 			          <p onClick={this.onClick} id="fatigue" className="tl f5 pointer ml1 mr5 br2 pv3 ph4 mb0 dib" style={{background: this.state.fatigue ? this.state.on_color : this.state.off_color, color: this.state.fatigue ? "white" : "gray"}}>FATIGUE/TIREDNESS</p>
 			          <p onClick={this.onClick} id="loss_taste_smell" className="tl f5 pointer ml5 mr1 br2 pv3 ph4 mb0 dib" style={{background: this.state.loss_taste_smell ? this.state.on_color : this.state.off_color, color: this.state.loss_taste_smell ? "white" : "gray"}}>LOSS OF TASTE OR SMELL</p>
-			          <p onClick={this.onNotaClick} id="nota" className="tc f5 pointer w-80 ml1 mr5 mt3 br2 pv3 ph4 mb2 dib" style={{background: this.state.nota ? this.state.on_color : this.state.off_color, color: this.state.nota ? "white" : "gray"}}>NONE OF THE ABOVE</p>
+						<p onClick={this.onClick} id="fever" className="tl f5 pointer ml1 mr5 br2 pv3 ph4 mb0 dib" style={{background: this.state.fever ? this.state.on_color : this.state.off_color, color: this.state.fever ? "white" : "gray"}}>FEVER</p>
+						<p onClick={this.onNotaClick} id="nota" className="tc f5 pointer ml5 mr1 mt3 br2 pv3 ph4 mb2 dib" style={{background: this.state.nota ? this.state.on_color : this.state.off_color, color: this.state.nota ? "white" : "gray"}}>NONE OF THE ABOVE</p>
 			        </div>
 			        <p className="f5 mt4 b red tc">{this.state.error}</p>
 			        <p className="f5 mt4 dark-blue tc">{this.state.message}</p>
@@ -220,7 +226,8 @@ class SymptomsForm extends React.Component {
 			          <p onClick={this.onClick} id="throat" className="tc f5 pointer ml3 mr3 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px",background: this.state.throat ? this.state.on_color : this.state.off_color, color: this.state.throat ? "white" : "gray"}}>SORE THROAT</p>
 			          <p onClick={this.onClick} id="fatigue" className="tc f5 pointer ml3 mr5 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px",background: this.state.fatigue ? this.state.on_color : this.state.off_color, color: this.state.fatigue ? "white" : "gray"}}>FATIGUE/TIREDNESS</p>
 			          <p onClick={this.onClick} id="loss_taste_smell" className="tc f5 pointer ml3 mr3 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px", background: this.state.loss_taste_smell ? this.state.on_color : this.state.off_color, color: this.state.loss_taste_smell ? "white" : "gray"}}>LOSS OF TASTE OR SMELL</p>
-			          <p onClick={this.onNotaClick} id="nota" className="tc f5 pointer ml3 mr5 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px",background: this.state.nota ? this.state.on_color : this.state.off_color, color: this.state.nota ? "white" : "gray"}}>NONE OF THE ABOVE</p>
+						<p onClick={this.onClick} id="fever" className="tc f5 pointer ml3 mr5 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px", background: this.state.fever ? this.state.on_color : this.state.off_color, color: this.state.fever ? "white" : "gray"}}>FEVER</p>
+						<p onClick={this.onNotaClick} id="nota" className="tc f5 pointer ml3 mr3 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px", background: this.state.nota ? this.state.on_color : this.state.off_color, color: this.state.nota ? "white" : "gray"}}>NONE OF THE ABOVE</p>
 			        </div>
 			        <p className="f6 mt4 b red ph4 tc">{this.state.error}</p>
 			        <p className="f6 mt4 dark-blue ph4 tc">{this.state.message}</p>

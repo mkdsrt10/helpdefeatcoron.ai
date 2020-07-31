@@ -13,6 +13,8 @@ import VitalForm from "../components/vitals.js"
 import SymptomsForm from "../components/symptoms.js"
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from '../aws-exports';
+import Footer from "../components/footer";
+import {CORSDOMAIN} from '../components/constant'
 Amplify.configure(awsconfig);
 
 var today = new Date()
@@ -60,6 +62,7 @@ class Dashboard extends React.Component {
 				exposed:"",
 				foundanyone:"",
 				feeling:"",
+				pain: 0,
 				// pic:"",
 			},
 			clientid: "",
@@ -149,7 +152,7 @@ class Dashboard extends React.Component {
 	getDatabyDate = (date) => {
 		let clientid = this.state.clientid
 		async function GetData() {
-			let response = await fetch(`https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/getvitals?client_id=${clientid}&&date=${date}`)
+			let response = await fetch(CORSDOMAIN+`/getvitals?client_id=${clientid}&&date=${date}`)
 			response = response.json()
 			return response
 		}
@@ -209,7 +212,7 @@ class Dashboard extends React.Component {
 				this.setState({clientid: res.username})
 				this.refreshCalendar()
 				async function GetData() {
-					let response = await fetch(`https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/getvitals?client_id=${res.username}&&date=${finaldate}`)
+					let response = await fetch(CORSDOMAIN+`/getvitals?client_id=${res.username}&&date=${finaldate}`)
 					response = response.json()
 					return response
 				}
@@ -351,6 +354,7 @@ class Dashboard extends React.Component {
 						{output}
 					</div>
 				</MobileView>
+				<Footer/>
 			</div>
 		);
 	}

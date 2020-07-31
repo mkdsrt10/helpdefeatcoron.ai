@@ -3,6 +3,7 @@ import "./transition.css"
 import { isMobile, BrowserView, MobileView } from "react-device-detect";
 import Amplify, { Auth, Storage } from 'aws-amplify';
 import awsconfig from './aws-exports';
+import {CORSDOMAIN} from './constant';
 Amplify.configure(awsconfig);
 
 class PersonalForm extends React.Component {
@@ -13,7 +14,7 @@ class PersonalForm extends React.Component {
 			risk_person: "",
 			known_found: "",
 			happy: "",
-			pain: "",
+			pain: 0,
 			// picture:'UPLOAD IMAGE',
 			video:'',
 			error_message:"",
@@ -37,7 +38,8 @@ class PersonalForm extends React.Component {
 
 	onTypeEnter = (e) => {
 		let x = e.target.value
-		this.setState({[e.target.id]: x})
+		console.log(x, typeof x);
+		this.setState({[e.target.id]: parseInt(x)})
 	}
 
 	componentDidMount() {
@@ -82,7 +84,7 @@ class PersonalForm extends React.Component {
 			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
-		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/updatevitals3?', requestOptions)
+		fetch(CORSDOMAIN+'/updatevitals3?', requestOptions)
 	        .then(res=>{
 	        	console.log(res)
 	        	setTimeout(()=>{this.setState({visible: false})},100)
@@ -111,7 +113,7 @@ class PersonalForm extends React.Component {
 			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
-		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/postvitals?', requestOptions)
+		fetch(CORSDOMAIN+'/postvitals?', requestOptions)
 	        .then(res=>{
 	        	console.log(res)
 	        	setTimeout(()=>{this.setState({visible: false})},100)
@@ -199,9 +201,9 @@ class PersonalForm extends React.Component {
 					        <a onClick={this.onOptionClick} id="false" name="happy" className="ml2 mb3 mt1 dark-gray pointer ph3 pv2 dib" style={{"font-size": (this.state.happy === "false") ? "44px" : "40px", opacity: (this.state.happy === "false") ? "1" : "0.5"}}>🙁</a>
 				    	</div>
 				    	<div className="ma1">
-					        <p className="mt3 ml5 b mb1 gray gender">RATE YOUR PAIN ON A SCALE OF 0-10</p>
-					        <p className="mt3 ml5 b mb1 f6 gray gender">0 being no pain and 10 being intolerable pain</p>
-					        <input id="pain" onChange={this.onTypeEnter} value={this.state.pain} type="number" min="0" max="10" className="mt3 ml5 mr2 bg-washed-green tc" style={{"height":"50px", "width":"35%","border":"none"}}/>
+					        <p className="mt3 ml5 b mb1 gray gender">RATE YOUR PAIN ON A SCALE OF 1-10</p>
+					        <p className="mt3 ml5 b mb1 f6 gray gender">1 being no pain and 10 being intolerable pain</p>
+					        <input id="pain" onChange={this.onTypeEnter} value={parseInt(this.state.pain)} type="number" min="1" max="10" className="mt3 ml5 mr2 bg-washed-green tc" style={{"height":"50px", "width":"35%","border":"none"}}/>
 					    </div>
 				    	{/*<div className="ma1">*/}
 					    {/*    <p className="mt3 ml5 b mb1 gray gender">IMPORT PICTURE</p>*/}
@@ -237,12 +239,12 @@ class PersonalForm extends React.Component {
 					        <a onClick={this.onOptionClick} id="false" name="happy" className="ml2 mb3 mt1 dark-gray pointer ph3 pv2 dib" style={{"font-size": this.state.happy === "false" ? "44px" : "40px", opacity: (this.state.happy === "false") ? "1" : "0.5"}}>🙁</a>
 				    	</div>
 				    	<div className="ma1 w-70">
-					        <p className="mt3 ml5 b f5 mb1 gray gender">RATE YOUR PAIN ON A SCALE OF 0-10</p>
-					        <p className="mt3 ml5 b mb1 f6 gray gender">0 being no pain and 10 being intolerable pain</p>
-					        <input id="pain" onChange={this.onTypeEnter} value={this.state.pain} type="number" min="0" max="10" className="mt3 ml5 mr2 bg-washed-green tc" style={{"height":"50px", "width":"35%","border":"none"}}/>
+					        <p className="mt3 ml5 b f5 mb1 gray gender">RATE YOUR PAIN ON A SCALE OF 1-10</p>
+					        <p className="mt3 ml5 b mb1 f6 gray gender">1 being no pain and 10 being intolerable pain</p>
+					        <input id="pain" onChange={this.onTypeEnter} value={parseInt(this.state.pain)} type="number" min="1" max="10" className="mt3 ml5 mr2 bg-washed-green tc" style={{"height":"50px", "width":"35%","border":"none"}}/>
 					    </div>
 				    	{/*<div className="ma1 w-70">*/}
-					    {/*    <p className="mt3 ml4 f5 b mb1 gray gender">IMPORT PICTURE</p>*/}
+					    {/*    <p classNameds="mt3 ml4 f5 b mb1 gray gender">IMPORT PICTURE</p>*/}
 					    {/*  	<p onClick={()=>document.getElementById('hiddenInputButton').click()} className="pointer ml4 mt3 pt4 ph3 f6 b gray bg-washed-blue w-60" style={{height:"150px", "padding-top":"60px", "background":"rgb(243,245,248)"}}>{this.state.picture}</p>*/}
 					    {/*  	<input id="hiddenInputButton" onChange={onChange} label="" placeholder="" type="file" style={{display:"none"}}/>*/}
 				    	{/*</div>*/}

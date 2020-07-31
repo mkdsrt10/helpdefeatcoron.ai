@@ -5,6 +5,7 @@ import SignInCard from "./signInCard.js";
 import {
   isMobile
 } from "react-device-detect";
+import Footer from "./footer";
 
 const LandingPage = () => {
 	return(
@@ -32,6 +33,7 @@ const LandingPage = () => {
 					</div>
 				</div>
 			</div>
+			<Footer/>
 		</div>
 		);
 }

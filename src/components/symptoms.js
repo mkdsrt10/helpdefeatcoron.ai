@@ -1,6 +1,7 @@
 import React from "react";
 import "./transition.css"
 import { isMobile, BrowserView, MobileView } from "react-device-detect";
+import { CORSDOMAIN } from "./constant"
 
 class SymptomsForm extends React.Component {
 	constructor(props) {
@@ -111,7 +112,7 @@ class SymptomsForm extends React.Component {
 			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
-		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/updatevitals2?', requestOptions)
+		fetch(CORSDOMAIN+'/updatevitals2?', requestOptions)
 	        .then(res=>{
 	        	console.log(res)
 	        	setTimeout(()=>{this.setState({visible: false})}, 100)
@@ -147,7 +148,7 @@ class SymptomsForm extends React.Component {
 			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
-		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/postvitals?', requestOptions)
+		fetch(CORSDOMAIN+'/postvitals?', requestOptions)
 	        .then(res=>{
 	        	console.log(res)
 	        	setTimeout(()=>{this.setState({visible: false})},100)
@@ -197,8 +198,8 @@ class SymptomsForm extends React.Component {
 			          <p onClick={this.onClick} id="bodyache" className="tl f5 pointer ml1 mr5 br2 pv3 ph4 mb0 dib" style={{background: this.state.bodyache ? this.state.on_color : this.state.off_color, color: this.state.bodyache ? "white" : "gray"}}>BODY ACHE</p>
 			          <p onClick={this.onClick} id="throat" className="tl f5 pointer ml5 mr3 br2 pv3 ph4 mb0 dib" style={{background: this.state.throat ? this.state.on_color : this.state.off_color, color: this.state.throat ? "white" : "gray"}}>SORE THROAT</p>
 			          <p onClick={this.onClick} id="fatigue" className="tl f5 pointer ml1 mr5 br2 pv3 ph4 mb0 dib" style={{background: this.state.fatigue ? this.state.on_color : this.state.off_color, color: this.state.fatigue ? "white" : "gray"}}>FATIGUE/TIREDNESS</p>
-			          <p onClick={this.onClick} id="loss_taste_smell" className="tl f5 pointer ml1 mr5 br2 pv3 ph4 mb0 dib" style={{background: this.state.loss_taste_smell ? this.state.on_color : this.state.off_color, color: this.state.loss_taste_smell ? "white" : "gray"}}>LOSS OF TASTE OR SMELL</p>
-			          <p onClick={this.onNotaClick} id="nota" className="tc f5 pointer w-80 ml5 mr1 mt3 br2 pv3 ph4 mb2 dib" style={{background: this.state.nota ? this.state.on_color : this.state.off_color, color: this.state.nota ? "white" : "gray"}}>NONE OF THE ABOVE</p>
+			          <p onClick={this.onClick} id="loss_taste_smell" className="tl f5 pointer ml5 mr1 br2 pv3 ph4 mb0 dib" style={{background: this.state.loss_taste_smell ? this.state.on_color : this.state.off_color, color: this.state.loss_taste_smell ? "white" : "gray"}}>LOSS OF TASTE OR SMELL</p>
+			          <p onClick={this.onNotaClick} id="nota" className="tc f5 pointer w-80 ml1 mr5 mt3 br2 pv3 ph4 mb2 dib" style={{background: this.state.nota ? this.state.on_color : this.state.off_color, color: this.state.nota ? "white" : "gray"}}>NONE OF THE ABOVE</p>
 			        </div>
 			        <p className="f5 mt4 b red tc">{this.state.error}</p>
 			        <p className="f5 mt4 dark-blue tc">{this.state.message}</p>
@@ -218,7 +219,7 @@ class SymptomsForm extends React.Component {
 			          <p onClick={this.onClick} id="bodyache" className="tc f5 pointer ml3 mr5 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px",background: this.state.bodyache ? this.state.on_color : this.state.off_color, color: this.state.bodyache ? "white" : "gray"}}>BODY ACHE</p>
 			          <p onClick={this.onClick} id="throat" className="tc f5 pointer ml3 mr3 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px",background: this.state.throat ? this.state.on_color : this.state.off_color, color: this.state.throat ? "white" : "gray"}}>SORE THROAT</p>
 			          <p onClick={this.onClick} id="fatigue" className="tc f5 pointer ml3 mr5 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px",background: this.state.fatigue ? this.state.on_color : this.state.off_color, color: this.state.fatigue ? "white" : "gray"}}>FATIGUE/TIREDNESS</p>
-			          <p onClick={this.onClick} id="loss_taste_smell" className="tc f5 pointer ml3 mr5 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px", background: this.state.loss_taste_smell ? this.state.on_color : this.state.off_color, color: this.state.loss_taste_smell ? "white" : "gray"}}>LOSS OF TASTE OR SMELL</p>
+			          <p onClick={this.onClick} id="loss_taste_smell" className="tc f5 pointer ml3 mr3 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px", background: this.state.loss_taste_smell ? this.state.on_color : this.state.off_color, color: this.state.loss_taste_smell ? "white" : "gray"}}>LOSS OF TASTE OR SMELL</p>
 			          <p onClick={this.onNotaClick} id="nota" className="tc f5 pointer ml3 mr5 br2 pv3 ph4 mb2 w-70" style={{margin:"auto", "margin-bottom":"10px",background: this.state.nota ? this.state.on_color : this.state.off_color, color: this.state.nota ? "white" : "gray"}}>NONE OF THE ABOVE</p>
 			        </div>
 			        <p className="f6 mt4 b red ph4 tc">{this.state.error}</p>

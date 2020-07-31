@@ -3,6 +3,7 @@ import "./transition.css"
 import {isMobile, BrowserView, MobileView} from "react-device-detect"
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from '../aws-exports';
+import {CORSDOMAIN} from './constant';
 Amplify.configure(awsconfig);
 
 let x
@@ -41,13 +42,13 @@ class Waiting extends React.Component {
                   headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
                     body: JSON.stringify(putresult)
                 };
-            fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/postresult?', requestOptions)
+            fetch(CORSDOMAIN+'/postresult?', requestOptions)
                   .then(res=>{
                     count+=1
                     console.log(res)
                     if (count === 7) {
                       async function GetData() {
-                        let response = await fetch(`https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/getresult?client_id=${x}&d1=${arr2[0]}&d2=${arr2[1]}&d3=${arr2[2]}&d4=${arr2[3]}&d5=${arr2[4]}&d6=${arr2[5]}&d7=${arr2[6]}`)
+                        let response = await fetch(CORSDOMAIN+`/getresult?client_id=${x}&d1=${arr2[0]}&d2=${arr2[1]}&d3=${arr2[2]}&d4=${arr2[3]}&d5=${arr2[4]}&d6=${arr2[5]}&d7=${arr2[6]}`)
                         return response.json()
                       }
                       console.log("in get data")

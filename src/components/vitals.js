@@ -1,6 +1,7 @@
 import React from "react";
 import "./transition.css"
 import { BrowserView, MobileView } from "react-device-detect";
+import { CORSDOMAIN } from './constant'
 
 class VitalForm extends React.Component {
 	constructor(props) {
@@ -15,7 +16,7 @@ class VitalForm extends React.Component {
 			heart: "",
 			heart_rate: "",
 			oxygen: "",
-			respiratoryrate: "",
+			respiratoryrate: 0,
 			bp: "",
 			error_message:"",
 			bg: "white",
@@ -35,8 +36,8 @@ class VitalForm extends React.Component {
 	}
 
 	onTypeEnter = (e) => {
-		let x = e.target.value
-		x = x.toLowerCase()
+		let x = e.target.value;
+		// x = x.toLowerCase()
 		this.setState({[e.target.id]: x})
 	}
 
@@ -76,7 +77,7 @@ class VitalForm extends React.Component {
 			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
-		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/postvitals?', requestOptions)
+		fetch(CORSDOMAIN+'/postvitals?', requestOptions)
 	        .then(res=>{
 	        	console.log(res)
 	        	setTimeout(()=>{this.setState({visible: false})},100)
@@ -106,7 +107,7 @@ class VitalForm extends React.Component {
 			    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
 		        body: JSON.stringify(senddata)
 		    };
-		fetch('https://cors-anywhere.herokuapp.com/https://534q6zi164.execute-api.ap-south-1.amazonaws.com/pluto/updatevitals1?', requestOptions)
+		fetch(CORSDOMAIN+'/updatevitals1?', requestOptions)
 	        .then(res=>{
 	        	console.log(res)
 	        	setTimeout(()=>{this.setState({visible: false})},100)
@@ -128,8 +129,8 @@ class VitalForm extends React.Component {
 		let {onVitalsUpdate, Dated, Month} = this.props
 		const onClick = (e) => {
 			console.log(this.state)
-			if (this.state.fever === "" || this.state.temp ==="" || this.state.heart==="" || this.state.heart_rate === "" || this.state.oxygen === "" || this.state.bp === "") {
-				this.setState({error_message: "Please fill all the details"})
+			if (this.state.temp ==="" || this.state.heart==="" || this.state.heart_rate === "" || this.state.oxygen === "" || this.state.bp === "") {
+				this.setState({error_message: "Please fill all the details correctly."})
 			} else {
 				this.setState({error_message: ""})
 				this.setState({message: "Please wait..."})
@@ -253,7 +254,7 @@ class VitalForm extends React.Component {
 							<div className="mv2 pa1">
 						        <p className="mt4 f5 ml3 b pa0 mb0 gray gender">RESPIRATORY RATE</p>
 						        <div style={{display: "flex"}}>
-						        	<input id="respiratoryrate" onChange={this.onTypeEnter} type="text" className="mt3 ml3 mr2 bg-washed-green tc" style={{"height":"50px", "width":"30%","border":"none"}}/>
+						        	<input id="respiratoryrate" onChange={this.onTypeEnter} type="number" min="0" className="mt3 ml3 mr2 bg-washed-green tc" style={{"height":"50px", "width":"30%","border":"none"}}/>
 						            <p className="mt4 f6 b ml2 gray">UNITS </p>
 						        </div>
 							</div>

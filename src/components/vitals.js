@@ -64,7 +64,7 @@ class VitalForm extends React.Component {
 	sendData = () => {
 		let senddata = {
 			clientid: this.props.clientid,
-			respiratoryrate: this.state.respiratoryrate,
+			respiratoryrate: parseFloat(this.state.respiratoryrate),
 			date: `${this.props.Dated}/${this.props.Month}`,
 			heartratefeeling: this.state.heart,
             heartrate: parseFloat(this.state.heart_rate),
@@ -95,7 +95,7 @@ class VitalForm extends React.Component {
 		let senddata = {
 			clientid: this.props.clientid,
 			date: `${this.props.Dated}/${this.props.Month}`,
-			respiratoryrate: this.state.respiratoryrate,
+			respiratoryrate: parseFloat(this.state.respiratoryrate),
 			heartratefeeling: this.state.heart,
             heartrate: parseFloat(this.state.heart_rate),
             bloodpressure1: this.state.bp,
@@ -132,6 +132,8 @@ class VitalForm extends React.Component {
 			console.log(this.state)
 			if (this.state.temp ==="" || this.state.heart==="" || this.state.heart_rate === "" || this.state.oxygen === "" || this.state.bp === "") {
 				this.setState({error_message: "Please fill all the details correctly."})
+			} else if (!this.state.bp.includes("/")) {
+				this.setState({error_message:"Blood Pressure must be of the form 'xx/xx'."})
 			} else {
 				this.setState({error_message: ""})
 				this.setState({message: "Please wait..."})
@@ -154,7 +156,7 @@ class VitalForm extends React.Component {
 			            	  <p className="f5 gray mb3 dib ml7">{monthNames[Month-1]} {Dated}</p>
 			        	    </div>
 					    	<div className="mt2 mb2">
-						        <p className="mt3 ml5 b pa0 mb0 gray gender">WHAT IS YOUR TEMPERATURE?</p>
+						        <p className="mt3 ml5 b pa0 mb0 gray gender">TEMPERATURE:</p>
 						        <div style={{display: "flex"}}>
 						        	<input id="temp" onChange={this.onTypeEnter} value={this.state.temp} type="number" min="0" className="mt3 ml5 mr2 bg-washed-green tc" style={{"height":"50px", "width":"15%","border":"none"}}/>
 									<select onChange={(event) => {
@@ -164,7 +166,7 @@ class VitalForm extends React.Component {
 											this.setState({temptype: false})
 										}
 									}} id="temptype" name="temptype" className="mt3" style={{borderColor: "#777", color: "#777", borderWidth: 0.5}}>
-										<option style={{color: "#777"}} value="degree">DEGREES</option>
+										<option style={{color: "#777"}} value="degree">CELSIUS</option>
 										<option style={{color: "#777"}} value="ferh">FAHRENHEIT</option>
 									</select>
 						        </div>
@@ -200,7 +202,7 @@ class VitalForm extends React.Component {
 						        <p className="mt3 ml5 b pa0 mb0 gray gender">OXYGEN SATURATION</p>
 						        <div style={{display: "flex"}}>
 						        	<input id="oxygen" onChange={this.onTypeEnter} value={this.state.oxygen} type="number" min="0" className="mt3 ml5 mr2 bg-washed-green tc" style={{"height":"50px", "width":"15%","border":"none"}}/>
-						            <p className="mt4 f6 b ml2 gray">UNITS </p>
+						            <p className="mt4 f6 b ml2 gray">%</p>
 						        </div>
 						    </div>
 						    <p className="f5 mt4 b red tc">{this.state.error_message}</p>

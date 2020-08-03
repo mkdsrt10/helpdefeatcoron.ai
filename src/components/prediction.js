@@ -10,8 +10,7 @@ class Prediction extends React.Component {
             visible: "",
             dates:"",
             esi:"",
-            psi:"",
-            riskf:"",
+            risk:"",
             today_risk:"",
             output:"",
             data:"",
@@ -25,7 +24,7 @@ class Prediction extends React.Component {
         setTimeout(()=>{this.setState({visible: true})}, 25)
         let x = this.props.data
         console.log(x)
-        let dates=[], esis=[], psis=[], risks=[]
+        let dates=[], esis=[], bools=[]
         for (let i=0; i<8; i++) {
             arr.push(`${today.getDate()}/${today.getMonth()+1}`)
             today.setDate(today.getDate()-1)
@@ -35,45 +34,43 @@ class Prediction extends React.Component {
                 a = a.split(",")
                 dates.push(a[0])
                 esis.push(parseFloat(a[1]))
-                psis.push(parseFloat(a[2]))
-                risks.push(parseFloat(a[3]))
+                bools.push(parseFloat(a[2]))
+                
                 if (`${this.props.Dated}/${this.props.Month}` === a[0]) {
-                    r=parseFloat(a[3])
-                    this.setState({today_risk: parseFloat(a[3])})
+                    r = parseFloat(a[2])
+                    this.setState({today_risk: r})
                 }
             }
-            if (r <= 0.25) {
+            if (r == 0) {
                 this.setState({output: "LOW RISK"})
-            } else if (r >= 0.75) {
-                this.setState({output: "HIGH RISK"})
             } else {
-                this.setState({output: "MEDIUM RISK"})
+                this.setState({output: "HIGH RISK"})
             }
+
             this.setState({dates: dates})
             this.setState({esi: esis})
-            this.setState({psi: psis})
-            this.setState({riskf: risks})
+            this.setState({risk: bools})
             let dataset = [
               {
-                name: arr[0], riskfactor: risks[dates.indexOf(arr[0])]
+                name: arr[0], riskfactor: esis[dates.indexOf(arr[0])]
               },
               {
-                name: arr[1], riskfactor: risks[dates.indexOf(arr[1])]
+                name: arr[1], riskfactor: esis[dates.indexOf(arr[1])]
               },
               {
-                name: arr[2], riskfactor: risks[dates.indexOf(arr[2])]
+                name: arr[2], riskfactor: esis[dates.indexOf(arr[2])]
               },
               {
-                name: arr[3], riskfactor: risks[dates.indexOf(arr[3])]
+                name: arr[3], riskfactor: esis[dates.indexOf(arr[3])]
               },
               {
-                name: arr[4], riskfactor: risks[dates.indexOf(arr[4])]
+                name: arr[4], riskfactor: esis[dates.indexOf(arr[4])]
               },
               {
-                name: arr[5], riskfactor: risks[dates.indexOf(arr[5])]
+                name: arr[5], riskfactor: esis[dates.indexOf(arr[5])]
               },
               {
-                name: arr[6], riskfactor: risks[dates.indexOf(arr[6])]
+                name: arr[6], riskfactor: esis[dates.indexOf(arr[6])]
               },
             ];
             this.setState({data: dataset})
@@ -81,7 +78,7 @@ class Prediction extends React.Component {
     }
 
     render() {
-      console.log(this.state.riskf)
+      console.log(this.state)
       const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
       ];

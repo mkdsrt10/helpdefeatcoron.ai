@@ -22,8 +22,7 @@ const List = ({vitals, personal, symptoms, onRouteChange, route}) => {
 			</div>
 			<div className="mt2 pb0" style={{display: "flex", flexDirection: 'row'}}>
 				<div style={{flex: 3}}>
-					<p onClick={()=>onRouteChange("symptoms")} className="ml4 mt0 pointer mb1 dark-gray" style={{"font-size":(isMobile)?"18px":"24px", "font-weight": (route === "symptoms") ? "bold" : "normal", color: (route === "symptoms") ? "rgb(255, 127, 129)" : "black"}}>DAILY SYMPTOMS</p>
-					<p className="f6 ml4 mb4 gray" style={{"font-size":(isMobile)?"12px":"14px"}}>Put in any recent medical issues like altered speech and pain</p>
+					<p onClick={()=>onRouteChange("symptoms")} className="ml4 mt0 pointer mb1 dark-gray" style={{"font-size":(isMobile)?"18px":"24px", "font-weight": (route === "symptoms") ? "bold" : "normal", color: (route === "symptoms") ? "rgb(255, 127, 129)" : "black"}}>SYMPTOMS</p>
 				</div>
 				<div style={{flex: 1}}>
 					{symptoms === 1?<Tck />:null}
